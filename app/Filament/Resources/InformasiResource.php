@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\InformasiResource\RelationManagers;
 use Filament\Forms\Components\RichEditor;
 
+
 class InformasiResource extends Resource
 {
     protected static ?string $model = Informasi::class;
@@ -81,5 +82,13 @@ class InformasiResource extends Resource
             'create' => Pages\CreateInformasi::route('/create'),
             'edit' => Pages\EditInformasi::route('/{record}/edit'),
         ];
-    }    
+    } 
+    
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_informasi')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
+    }
 }

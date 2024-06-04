@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('aduans', function (Blueprint $table) {
             $table->id();
             $table->string('aduan');
-            $table->textg('isi_aduan');
+            $table->text('isi_aduan');
             $table->char('bukti');
             $table->foreignId('users_id')->constrained()->onDelete('cascade');
             $table->timestamps();
