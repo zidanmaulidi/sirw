@@ -55,7 +55,6 @@ class AduanResource extends Resource
                 ImageColumn::make('bukti'),
                 TextColumn::make('users.name'),
                 TextColumn::make('updated_at'),
-                TextColumn::make('tanggapan'),
 
             ])
             ->filters([
