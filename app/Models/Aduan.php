@@ -15,7 +15,6 @@ class Aduan extends Model
         'aduan',
         'isi_aduan',
         'bukti',
-        'tanggapan',
         'users_id',
     ];
 
