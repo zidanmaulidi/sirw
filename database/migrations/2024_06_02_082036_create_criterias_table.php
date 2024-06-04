@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('aduans', function (Blueprint $table) {
+        Schema::create('criterias', function (Blueprint $table) {
             $table->id();
-            $table->string('aduan');
-            $table->text('isi_aduan');
-            $table->char('bukti');
-            $table->foreignId('users_id')->constrained()->onDelete('cascade');
+            $table->char('kriteria'); 
+            $table->char('kode_kriteria'); 
+            $table->decimal('bobot'); 
+            $table->enum('jenis',['benefit','cost']); 
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('aduans');
+        Schema::dropIfExists('criterias');
     }
 };

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wargas', function (Blueprint $table) {
+        Schema::create('rangkings', function (Blueprint $table) {
             $table->id();
-            
+            $table->char('alternatif')->nullable();
+            $table->decimal('skor', 10, 2)->nullable();
+            $table->integer('rangking')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wargas');
+        Schema::dropIfExists('rangkings');
     }
 };
