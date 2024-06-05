@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\NilaiAkhirResource\Pages;
 use App\Filament\Resources\NilaiAkhirResource\RelationManagers;
+use Ramsey\Uuid\Type\Integer;
 
 class NilaiAkhirResource extends Resource
 {
@@ -21,6 +22,8 @@ class NilaiAkhirResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-puzzle';
 
     protected static ?string $navigationGroup = 'Bantuan Sosial';
+    
+    protected static ?Int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -70,8 +73,8 @@ class NilaiAkhirResource extends Resource
     {
         return [
             'index' => Pages\ListNilaiAkhirs::route('/'),
-            'create' => Pages\CreateNilaiAkhir::route('/create'),
-            'edit' => Pages\EditNilaiAkhir::route('/{record}/edit'),
+            // 'create' => Pages\CreateNilaiAkhir::route('/create'),
+            // 'edit' => Pages\EditNilaiAkhir::route('/{record}/edit'),
         ];
     }    
 }

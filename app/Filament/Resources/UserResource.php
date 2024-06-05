@@ -31,6 +31,10 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = -2;
 
+    protected static function getNavigationBadge(): ?string
+{
+    return static::getModel()::count();
+}
     protected static ?string $navigationGroup = 'Data Warga';
 
     public static function form(Form $form): Form
@@ -62,6 +66,7 @@ class UserResource extends Resource
                         // select::make('domisilis_id')->relationship(
                         //     'domisilis','domisili')
                         //     ->required(),
+                        select::make('roles')->multiple()->relationship('roles','name'),
                         Select::make('kependudukan')->options([
                             'warga tetap' => 'warga tetap',
                             'warga pendatang' => 'warga pendatang',

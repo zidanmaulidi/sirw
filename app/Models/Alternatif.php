@@ -26,30 +26,30 @@ class Alternatif extends Model
     ];
 
     // Mutator untuk atribut 'umur'
-    public function getUmurAttribute($value)
-    {
-        if ($value >= 0 && $value <= 45) {
-            return '25';
-        } elseif ($value >= 46 && $value <= 50) {
-            return '50';
-        } elseif ($value >= 51 && $value <= 55) {
-            return '75';
-        } else {
-            return '100';
-        }
-    }
+    // public function getUmurAttribute($value)
+    // {
+    //     if ($value >= 0 && $value <= 45) {
+    //         return '25';
+    //     } elseif ($value >= 46 && $value <= 50) {
+    //         return '50';
+    //     } elseif ($value >= 51 && $value <= 55) {
+    //         return '75';
+    //     } else {
+    //         return '100';
+    //     }
+    // }
 
     // Mutator untuk atribut 'tanggungan'
-    public function getTanggunganAttribute($value)
-    {
-        if ($value >= 0 && $value == 1) {
-            return '25';
-        } elseif ($value == 2) {
-            return '50';
-        } elseif ($value == 3) {
-            return '75';
-        } else {
-            return '100';
-        }
-    }
+    // public function getTanggunganAttribute($value)
+    // {
+    //     if ($value >= 0 && $value == 1) {
+    //         return '25';
+    //     } elseif ($value == 2) {
+    //         return '50';
+    //     } elseif ($value == 3) {
+    //         return '75';
+    //     } else {
+    //         return '100';
+    //     }
+    // }
 }

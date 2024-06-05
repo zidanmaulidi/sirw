@@ -14,11 +14,45 @@ class UtilityService
     {
         $alternatifs = Alternatif::all();
 
-        $min = ['kondisi_rumah' => 50, 'kondisi_air' => 50, 'penghasilan' => 50, 'tegangan_listrik' => 75, 'pendidikan' => 25, 'pekerjaan' => 40, 'sumber_air' => 50, 'bahan_bakar_memasak' => 50,'umur' => 25, 'tanggungan' => 25];
-        $max = ['kondisi_rumah' => 100, 'kondisi_air' => 100, 'penghasilan' => 100, 'tegangan_listrik' => 100, 'pendidikan' => 100, 'pekerjaan' => 100, 'sumber_air' => 100, 'bahan_bakar_memasak' => 100,'umur' => 100, 'tanggungan' => 100 ];
+        // $min = ['kondisi_rumah' => 50, 'kondisi_air' => 50, 'penghasilan' => 50, 'tegangan_listrik' => 75, 'pendidikan' => 25, 'pekerjaan' => 40, 'sumber_air' => 50, 'bahan_bakar_memasak' => 50,'umur' => 25, 'tanggungan' => 25];
+        // $max = ['kondisi_rumah' => 100, 'kondisi_air' => 100, 'penghasilan' => 100, 'tegangan_listrik' => 100, 'pendidikan' => 100, 'pekerjaan' => 100, 'sumber_air' => 100, 'bahan_bakar_memasak' => 100,'umur' => 100, 'tanggungan' => 100 ];
     
+        $min = [
+            'kondisi_rumah' => Alternatif::min('kondisi_rumah'), 
+            'kondisi_air' => Alternatif::min('kondisi_air'), 
+            'penghasilan' => Alternatif::min('penghasilan'), 
+            'tegangan_listrik' => Alternatif::min('tegangan_listrik'), 
+            'pendidikan' => Alternatif::min('pendidikan'), 
+            'pekerjaan' => Alternatif::min('pekerjaan'), 
+            'sumber_air' => Alternatif::min('sumber_air'), 
+            'bahan_bakar_memasak' => Alternatif::min('bahan_bakar_memasak'),
+            'umur' => Alternatif::min('umur'), 
+            'tanggungan' => Alternatif::min('tanggungan')
+        ];
+        $max = [
+            'kondisi_rumah' => Alternatif::max('kondisi_rumah'), 
+            'kondisi_air' => Alternatif::max('kondisi_air'), 
+            'penghasilan' => Alternatif::max('penghasilan'), 
+            'tegangan_listrik' => Alternatif::max('tegangan_listrik'), 
+            'pendidikan' => Alternatif::max('pendidikan'), 
+            'pekerjaan' => Alternatif::max('pekerjaan'), 
+            'sumber_air' => Alternatif::max('sumber_air'), 
+            'bahan_bakar_memasak' => Alternatif::max('bahan_bakar_memasak'),
+            'umur' => Alternatif::max('umur'), 
+            'tanggungan' => Alternatif::max('tanggungan')
+        ];
+        // $max = ['kondisi_rumah' => 100, 'kondisi_air' => 100, 'penghasilan' => 100, 'tegangan_listrik' => 100, 'pendidikan' => 100, 'pekerjaan' => 100, 'sumber_air' => 100, 'bahan_bakar_memasak' => 100,'umur' => 100, 'tanggungan' => 100 ];
+
+        // $min = Alternatif::min(['kondisi_rumah', 'kondisi_air', 'penghasilan', 'tegangan_listrik', 'pendidikan','pekerjaan', 'sumber_air', 'bahan_bakar_memasak', 'umur', 'tanggungan']);
+
+        // $max = Alternatif::max(['kondisi_rumah', 'kondisi_air', 'penghasilan', 'tegangan_listrik', 'pendidikan','pekerjaan', 'sumber_air', 'bahan_bakar_memasak', 'umur', 'tanggungan']);
+
         $costCriteria = ['kondisi_rumah', 'kondisi_air', 'penghasilan', 'tegangan_listrik', 'pendidikan', 'pekerjaan', 'sumber_air', 'bahan_bakar_memasak'];
         $benefitCriteria = ['umur', 'tanggungan'];
+
+
+        
+
 
         foreach ($alternatifs as $alternatif) {
             $utility = Utiliti::updateOrCreate(
@@ -52,6 +86,21 @@ class UtilityService
     public function truncateUtilitiesTable()
     {
         DB::table('utilitis')->truncate();
+    }
+
+    public function truncateAlternatifsTable()
+    {
+        DB::table('alternatifs')->truncate();
+    }
+
+    public function truncateNilaiAkhirsTable()
+    {
+        DB::table('nilai_akhirs')->truncate();
+    }
+
+    public function truncateRankingsTable()
+    {
+        DB::table('rangkings')->truncate();
     }
 
     public function calculateFinalScores()
@@ -135,124 +184,16 @@ class UtilityService
             ]);
         }
     }
+
+    // fungsi menjalankan semua fungsi
+    public function calculateLangsungRankings(){
+        $this->truncateUtilitiesTable();
+        $this->truncateNilaiAkhirsTable();
+        $this->truncateRankingsTable();
+        $this->calculateAndFillUtilities();
+        $this->calculateFinalScores();
+        $this->calculateRankings();
+    }
     
 }
-
-// namespace App\Services;
-
-// use App\Models\Alternatif;
-// use App\Models\Utiliti;
-
-// class UtilityService
-// {
-//     public function calculateAndFillUtilities()
-//     {
-//         $alternatifs = Alternatif::all();
-
-//         // Initialize min and max arrays
-//         $min = [50,50,50,75,25,40,50,50,25,25];
-//         $max = [100,100,100,100,100,100,100,100,100,100];
-
-//         foreach ($alternatifs as $alternatif) {
-//             foreach ($alternatif->getAttributes() as $key => $value) {
-//                 if ($key !== 'id' && $key !== 'alternatif' && $key !== 'created_at' && $key !== 'updated_at') {
-//                     if (!isset($min[$key]) || $value < $min[$key]) {
-//                         $min[$key] = $value;
-//                     }
-//                     if (!isset($max[$key]) || $value > $max[$key]) {
-//                         $max[$key] = $value;
-//                     }
-//                 }
-//             }
-//         }
-
-//         // Define criteria types
-//         $costCriteria = ['kondisi_rumah', 'kondisi_air', 'penghasilan', 'tegangan_listrik', 'pendidikan', 'pekerjaan', 'sumber_air', 'bahan_bakar_memasak'];
-//         $benefitCriteria = ['umur', 'tanggungan'];
-
-//         foreach ($alternatifs as $alternatif) {
-//             $utility = Utiliti::updateOrCreate(
-//                 ['alternatif' => $alternatif->alternatif],
-//                 []
-//             );
-
-//             foreach ($costCriteria as $criteria) {
-//                 $utility->$criteria = $this->calculateCostUtility($alternatif->$criteria, $min[$criteria], $max[$criteria]);
-//             }
-
-//             foreach ($benefitCriteria as $criteria) {
-//                 $utility->$criteria = $this->calculateBenefitUtility($alternatif->$criteria, $min[$criteria], $max[$criteria]);
-//             }
-
-//             $utility->save();
-//         }
-//     }
-
-//     private function calculateCostUtility($value, $min, $max)
-//     {
-//         return (($max - $value) / ($max - $min)) * 100;
-//     }
-
-//     private function calculateBenefitUtility($value, $min, $max)
-//     {
-//         return (($value - $min) / ($max - $min)) * 100;
-//     }
-// }
-
-// namespace App\Services;
-
-// use App\Models\Alternatif;
-// use App\Models\Utiliti;
-
-// class UtilityService
-// {
-//     public function calculateAndFillUtilities()
-//     {
-//         $alternatifs = Alternatif::all();
-
-//         $key = ['kondisi_rumah', 'kondisi_air', 'penghasilan', 'tegangan_listrik', 'pendidikan', 'pekerjaan', 'sumber_air', 'bahan_bakar_memasak'];
-//         $key = ['umur', 'tanggungan'];
-
-//         // Inisialisasi min dan max array sesuai dengan data yang diberikan
-//         $min = [50, 50, 50, 75, 25, 40, 50, 50, 25, 25];
-//         $max = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-
-//         foreach ($alternatifs as $alternatif) {
-//             $utility = Utiliti::updateOrCreate(
-//                 ['alternatif' => $alternatif->alternatif],
-//                 []
-//             );
-
-//             // Hitung utilitas untuk setiap kriteria sesuai dengan jenis kriteria
-//             foreach ($alternatif->getAttributes() as $key => $value) {
-//                 if ($key !== 'id' && $key !== 'alternatif' && $key !== 'created_at' && $key !== 'updated_at') {
-//                     // Tentukan jenis kriteria berdasarkan nama kolom
-//                     $jenis = 'cost';
-//                     if ($key === 'umur' || $key === 'tanggungan') {
-//                         $jenis = 'benefit';
-//                     }
-
-//                     // Hitung utilitas berdasarkan jenis kriteria
-//                     if ($jenis === 'cost') {
-//                         $utility->$key = $this->calculateCostUtility($value, $min[$key], $max[$key]);
-//                     } else {
-//                         $utility->$key = $this->calculateBenefitUtility($value, $min[$key], $max[$key]);
-//                     }
-//                 }
-//             }
-
-//             $utility->save();
-//         }
-//     }
-
-//     private function calculateCostUtility($value, $min, $max)
-//     {
-//         return (($max - $value) / ($max - $min)) * 100;
-//     }
-
-//     private function calculateBenefitUtility($value, $min, $max)
-//     {
-//         return (($value - $min) / ($max - $min)) * 100;
-//     }
-// }
 

@@ -22,6 +22,8 @@ class UtilitiResource extends Resource
 
     protected static ?string $navigationGroup = 'Bantuan Sosial';
 
+    protected static ?Int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -70,8 +72,8 @@ class UtilitiResource extends Resource
     {
         return [
             'index' => Pages\ListUtilitis::route('/'),
-            'create' => Pages\CreateUtiliti::route('/create'),
-            'edit' => Pages\EditUtiliti::route('/{record}/edit'),
+            // 'create' => Pages\CreateUtiliti::route('/create'),
+            // 'edit' => Pages\EditUtiliti::route('/{record}/edit'),
         ];
     }    
 }
