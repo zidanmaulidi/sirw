@@ -45,7 +45,7 @@ class UserResource extends Resource
                 Card::make()
                     ->schema([
                         TextInput::make('name')->required(),
-                        TextInput::make('email')->email()->required(),
+                        TextInput::make('email')->email()->required()->unique(ignoreRecord:true), 
                         TextInput::make('password')->required(),
                         Select::make('level_users_id')
                             ->relationship('level_users', 'level_nama')
@@ -57,22 +57,16 @@ class UserResource extends Resource
                                 }
                             }),
                         Select::make('domisilis_id')
-                            ->relationship('domisilis', 'domisili')
+                            ->relationship('domisilis', 'domisili') // domisilis id select 1 or 2
                             ->required()
                             ->visible(fn ($get) => !in_array($get('level_users_id'), [1, 2])),
-                        // select::make('level_users_id')->relationship(
-                        //     'level_users','level_nama',
-                        // )->required(),
-                        // select::make('domisilis_id')->relationship(
-                        //     'domisilis','domisili')
-                        //     ->required(),
-                        select::make('roles')->multiple()->relationship('roles','name'),
+                        select::make('roles')->multiple()->relationship('roles','name')->required(),
                         Select::make('kependudukan')->options([
                             'warga tetap' => 'warga tetap',
                             'warga pendatang' => 'warga pendatang',
                         ])->required(),
                         TextInput::make('no_KK')->required(),
-                        TextInput::make('NIK')->required(),
+                        TextInput::make('NIK')->required()->unique(ignoreRecord:true),
                         Select::make('jenis_kelamin')->options([
                             'laki-laki' => 'laki-laki',
                             'perempuan' => 'perempuan',

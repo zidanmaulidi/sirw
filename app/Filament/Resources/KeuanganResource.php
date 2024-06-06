@@ -55,7 +55,7 @@ class KeuanganResource extends Resource
                 TextColumn::make('keterangan')->searchable(),
                 TextColumn::make('uang_masuk'),
                 TextColumn::make('uang_keluar'),
-                TextColumn::make('saldo_kas'),
+                // TextColumn::make('saldo_kas'),
             ])
             ->filters([
                 //

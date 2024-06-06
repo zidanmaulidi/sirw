@@ -12,28 +12,10 @@ class Aduan extends Model
     use HasFactory;
 
     protected $fillable  = [
+        'nama_pengadu',
         'aduan',
         'isi_aduan',
         'bukti',
-        'users_id',
     ];
 
-    public function users() : BelongsTo
-    {
-        return $this->belongsTo(User::class, 'users_id');
-    }
-
-    // Fungsi untuk menyimpan ID pengguna saat membuat aduan
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($aduans) {
-            // Ambil ID pengguna yang saat ini masuk
-            $loggedInUserId = Auth::id();
-            
-            // Tetapkan ID pengguna saat ini ke aduan yang akan dibuat
-            $aduans->users_id = $loggedInUserId;
-        });
-    }
 }

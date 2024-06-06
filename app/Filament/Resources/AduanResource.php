@@ -40,11 +40,10 @@ class AduanResource extends Resource
                 //
                 Card::make()
                     ->schema([
+                        TextInput::make('nama_pengadu')->required(),
                         TextInput::make('aduan')->required(),
                         RichEditor::make('isi_aduan')->required(),
-                        FileUpload::make('bukti')->required()->directory('aduans_image')->visibility('public'),
-                        // Menampilkan ID pengguna yang terautentikasi sebagai bidang tersembunyi
-                        TextInput::make('users_id')->default(Auth::id())->hidden(),
+                        FileUpload::make('bukti')->required()->directory('aduans_image')->visibility('public'), 
                     ])
             ]);
     }
@@ -55,10 +54,10 @@ class AduanResource extends Resource
             ->columns([
                 //
                 TextColumn::make('id')->sortable(),
+                TextColumn::make('nama_pengadu'),
                 TextColumn::make('aduan'),
                 // TextColumn::make('isi_aduan'),
                 ImageColumn::make('bukti'),
-                TextColumn::make('users.name'),
                 TextColumn::make('updated_at'),
 
             ])
