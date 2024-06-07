@@ -4,17 +4,26 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Filament\Models\Contracts\FilamentUser;
+use App\Scopes\RTScope;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+        // Filter warga berdasarkan roles user
+    protected static function booted()
+    {
+        parent::booted();
+
+        static::addGlobalScope(new RTScope);
+    }
+
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
@@ -74,6 +83,12 @@ class User extends Authenticatable
     public function informasi(): HasMany
     {
         return $this->hasMany(Informasi::class);
+    }
+
+    // Implement FilamentUser method
+    public function canAccessFilament(): bool
+    {
+        return $this->hasRole(['admin', 'rw', 'rt', 'warga']); // Adjust roles as necessary
     }
 
 }

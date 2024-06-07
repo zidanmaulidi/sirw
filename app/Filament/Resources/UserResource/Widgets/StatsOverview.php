@@ -11,14 +11,16 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class StatsOverview extends BaseWidget
 {
-    // protected static string $view = 'filament.resources.user-resource.widgets.stats-overview';
 
     protected function getCards(): array
     {
         return [
-            Card::make('Users', User::all()->count()),
-            Card::make('Bounce rate', '21%'),
-            // Card::make('Average time on page', '3:12'),
+            Card::make('User', User::all()->count())
+            ->description('Jumlah akun')
+            ->descriptionIcon('heroicon-o-user'),
+            Card::make('Warga', User::where('level_users_id', 5)->count())
+            ->description('Jumlah Warga')
+            ->descriptionIcon('heroicon-o-users'),
         ];
     }
 

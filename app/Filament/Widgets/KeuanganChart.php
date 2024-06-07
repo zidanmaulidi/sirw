@@ -8,7 +8,7 @@ use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 
-class BlogPostsChart extends ChartWidget
+class KeuanganChart extends ChartWidget
 {
     protected static ?string $heading = 'Keuangan';
 
@@ -20,16 +20,21 @@ class BlogPostsChart extends ChartWidget
                 end: now()->endOfYear(),
             )
             ->perMonth()
-            ->count();
+            // ->count();
+            ->sum('uang_masuk');  // Menggunakan sum pada kolom 'uang_masuk'
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Blog posts',
+                    'label' => 'Uang Masuk',
+                    // 'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                    // 'borderColor' => '#9BD0F5',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                    'borderColor' => '#9BD0F5',
                 ],
             ],
-            'labels' => $data->map(fn (TrendValue $value) => $value->date),
+            // 'labels' => $data->map(fn (TrendValue $value) => $value->date),
+            // 'labels' => $data->map(fn (TrendValue $value) => $value->date->format('F')), // Format label sebagai nama bulan
         ];
     }
 

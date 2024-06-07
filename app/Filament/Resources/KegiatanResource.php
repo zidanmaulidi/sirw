@@ -57,9 +57,15 @@ class KegiatanResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
+                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
+                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
+                Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
+                Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
+                Tables\Actions\DeleteAction::make()-> visible(fn () => !auth()->user()->hasRole('warga')),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
