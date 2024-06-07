@@ -76,8 +76,4 @@ class User extends Authenticatable
         return $this->hasMany(Informasi::class);
     }
 
-    public function aduan(): HasMany
-    {
-        return $this->hasMany(Aduan::class);
-    }
 }

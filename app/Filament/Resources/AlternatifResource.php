@@ -26,6 +26,10 @@ class AlternatifResource extends Resource
 
     protected static ?string $navigationGroup = 'Bantuan Sosial';
 
+    protected static ?string $navigationLabel = 'Alternatif';
+
+    protected static ?Int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -73,8 +77,23 @@ class AlternatifResource extends Resource
                     100 => 'LPG' ,
                     50 => 'kayu bakar' 
                     ])->required(),
-                TextInput::make('umur')->numeric()->required(),
-                TextInput::make('tanggungan')->numeric()->required(),
+                Select::make('umur')
+                ->options([
+                    100 => '> 55 ' ,
+                    75 => '51 - 55',
+                    50=> '45-50',
+                    25=> '< 45'
+
+                    ])->required(),
+                Select::make('tanggungan')
+                ->options([
+                    100 => '>= 4 ' ,
+                    75 => '3',
+                    50=> '2',
+                    25=> '1'
+
+                    ])
+                ->required(),
             ]);
     }
 

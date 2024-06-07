@@ -24,6 +24,10 @@ class CriteriaResource extends Resource
 
     protected static ?string $navigationGroup = 'Bantuan Sosial';
 
+    protected static ?string $navigationLabel = 'Kriteria';
+
+    protected static ?Int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -69,8 +73,8 @@ class CriteriaResource extends Resource
     {
         return [
             'index' => Pages\ListCriterias::route('/'),
-            'create' => Pages\CreateCriteria::route('/create'),
-            'edit' => Pages\EditCriteria::route('/{record}/edit'),
+            // 'create' => Pages\CreateCriteria::route('/create'),
+            // 'edit' => Pages\EditCriteria::route('/{record}/edit'),
         ];
     }    
 }

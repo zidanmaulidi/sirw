@@ -23,6 +23,7 @@ class KeuanganResource extends Resource
     protected static ?string $model = Keuangan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cash';
+    
     protected static ?string $navigationLabel = 'Keuangan';
 
     protected static ?string $navigationGroup = 'Menu';
@@ -54,7 +55,7 @@ class KeuanganResource extends Resource
                 TextColumn::make('keterangan')->searchable(),
                 TextColumn::make('uang_masuk'),
                 TextColumn::make('uang_keluar'),
-                TextColumn::make('saldo_kas'),
+                // TextColumn::make('saldo_kas'),
             ])
             ->filters([
                 //

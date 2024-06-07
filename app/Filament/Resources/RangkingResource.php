@@ -22,6 +22,8 @@ class RangkingResource extends Resource
 
     protected static ?string $navigationGroup = 'Bantuan Sosial';
 
+    protected static ?Int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -35,7 +37,7 @@ class RangkingResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('id'),
+                // TextColumn::make('id'),
                 TextColumn::make('alternatif'),
                 TextColumn::make('skor'),
                 TextColumn::make('rangking'),
@@ -62,8 +64,8 @@ class RangkingResource extends Resource
     {
         return [
             'index' => Pages\ListRangkings::route('/'),
-            'create' => Pages\CreateRangking::route('/create'),
-            'edit' => Pages\EditRangking::route('/{record}/edit'),
+            // 'create' => Pages\CreateRangking::route('/create'),
+            // 'edit' => Pages\EditRangking::route('/{record}/edit'),
         ];
     }    
 }

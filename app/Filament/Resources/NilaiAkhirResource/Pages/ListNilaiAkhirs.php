@@ -18,6 +18,10 @@ class ListNilaiAkhirs extends ListRecords
             Actions\ButtonAction::make('Calculate Final Scores')
                 ->action('calculateFinalScores')
                 ->label('Calculate Final Scores'),
+            Actions\ButtonAction::make('Truncate NilaiAkhirs Table')
+                ->action('truncateNilaiAkhirsTable')
+                ->color('danger')
+                ->label('Delete Data'),
         ];
     }
 
@@ -27,5 +31,13 @@ class ListNilaiAkhirs extends ListRecords
         $service->calculateFinalScores();
 
         $this->notify('success', 'Final scores calculated and table filled successfully.');
+    }
+
+    public function truncateNilaiAkhirsTable()
+    {
+        $service = new UtilityService();
+        $service->truncateNilaiAkhirsTable();
+
+        $this->notify('success', 'Nilai Akhir table truncated successfully.');
     }
 }
