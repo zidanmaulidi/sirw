@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Althinect\FilamentSpatieRolesPermissions\Resources\RoleResource\Pages\EditRole;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Informasi;
@@ -10,15 +11,20 @@ use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\InformasiResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\InformasiResource\RelationManagers;
-use Filament\Forms\Components\RichEditor;
 
 
 class InformasiResource extends Resource
@@ -59,9 +65,15 @@ class InformasiResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
+                Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
+                Tables\Actions\DeleteAction::make()-> visible(fn () => !auth()->user()->hasRole('warga')),
+                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
+                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
+                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

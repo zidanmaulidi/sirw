@@ -26,12 +26,15 @@ class StatsOverview extends BaseWidget
 
         return [
             Card::make('Uang Masuk', $uangMasuk)
+            ->color('success')
             ->description('total masuk kas')
             ->descriptionIcon('heroicon-o-trending-down'),
             Card::make('Uang Keluar', $uangKeluar)
+            ->color('danger')
             ->description('total keluar kas')
             ->descriptionIcon('heroicon-o-trending-up'),
             Card::make('Saldo Kas', $saldoKas)
+            ->color('primary')
             ->description('total kas saat ini')
             ->descriptionIcon('heroicon-o-cash'),
         ];
