@@ -14,19 +14,19 @@ class ListRangkings extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\ButtonAction::make('Calculate Rankings')
+            Actions\ButtonAction::make('Calculate Rankings') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('calculateRankings')
-                ->label('Calculate Rankings'),
+                ->label('Htitug Tahap Rangking'),
 
-            Actions\ButtonAction::make('Rangking Alternatifs Table')
+            Actions\ButtonAction::make('Rangking Alternatifs Table') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('calculateLangsungRankings')
                 ->color('success')
-                ->label('Hitung Rangking'),
+                ->label('Hitung Langsung Perangkingan'),
 
-            Actions\ButtonAction::make('Truncate Rangkings Table')
+            Actions\ButtonAction::make('Truncate Rangkings Table') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('truncateRankingsTable')
                 ->color('danger')
-                ->label('Delete Data'),
+                ->label('Hapus Semua Data'),
         ];
     }
 

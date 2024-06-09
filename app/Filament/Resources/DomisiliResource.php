@@ -73,4 +73,12 @@ class DomisiliResource extends Resource
             'edit' => Pages\EditDomisili::route('/{record}/edit'),
         ];
     }    
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_domisilis')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
+    }
 }

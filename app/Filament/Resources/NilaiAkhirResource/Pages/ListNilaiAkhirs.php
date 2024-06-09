@@ -15,13 +15,13 @@ class ListNilaiAkhirs extends ListRecords
     {
         return [
             // Actions\CreateAction::make(),
-            Actions\ButtonAction::make('Calculate Final Scores')
+            Actions\ButtonAction::make('Calculate Final Scores') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('calculateFinalScores')
-                ->label('Calculate Final Scores'),
-            Actions\ButtonAction::make('Truncate NilaiAkhirs Table')
+                ->label('Hitung Tahap Nilai Akhir'),
+            Actions\ButtonAction::make('Truncate NilaiAkhirs Table')  -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('truncateNilaiAkhirsTable')
                 ->color('danger')
-                ->label('Delete Data'),
+                ->label('Hapus Data'),
         ];
     }
 

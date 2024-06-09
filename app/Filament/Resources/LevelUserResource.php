@@ -88,7 +88,7 @@ class LevelUserResource extends Resource
                 Tables\Actions\DeleteAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
             ]);
     }
     
@@ -121,6 +121,14 @@ class LevelUserResource extends Resource
             // Card::make('Bounce rate', '21%'),
             // Card::make('Average time on page', '3:12'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_level_users')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
     }
 }
 

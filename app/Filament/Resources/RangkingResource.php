@@ -38,8 +38,8 @@ class RangkingResource extends Resource
             ->columns([
                 //
                 // TextColumn::make('id'),
-                TextColumn::make('alternatif'),
-                TextColumn::make('skor'),
+                TextColumn::make('alternatif')->searchable(),
+                TextColumn::make('skor')->sortable(),
                 TextColumn::make('rangking'),
             ])
             ->filters([
@@ -47,9 +47,11 @@ class RangkingResource extends Resource
             ])
             ->actions([
                 // 
+
+                Tables\Actions\DeleteAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'rw'])),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()-> visible(fn () => auth()->user()->hasRole(['admin', 'rw'])),
             ]);
     }
     
@@ -68,4 +70,12 @@ class RangkingResource extends Resource
             // 'edit' => Pages\EditRangking::route('/{record}/edit'),
         ];
     }    
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_nilai_akhirs')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
+    }
 }

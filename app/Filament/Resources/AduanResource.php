@@ -56,7 +56,6 @@ class AduanResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('nama_pengadu'),
                 TextColumn::make('aduan'),
-                // TextColumn::make('isi_aduan'),
                 ImageColumn::make('bukti'),
                 TextColumn::make('updated_at'),
 
@@ -66,11 +65,11 @@ class AduanResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+
+                Tables\Actions\DeleteAction::make() -> visible(fn () => !auth()->user()->hasRole('bendahara_rw')),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make() -> visible(fn () => !auth()->user()->hasRole('bendahara_rw')),
             ]);
     }
     
@@ -89,4 +88,12 @@ class AduanResource extends Resource
             'edit' => Pages\EditAduan::route('/{record}/edit'),
         ];
     }    
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_aduans')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
+    }
 }

@@ -57,7 +57,7 @@ class UtilitiResource extends Resource
                 // 
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()-> visible(fn () => auth()->user()->hasRole(['admin', 'rw'])),
             ]);
     }
     
@@ -76,4 +76,12 @@ class UtilitiResource extends Resource
             // 'edit' => Pages\EditUtiliti::route('/{record}/edit'),
         ];
     }    
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_utilitis')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
+    }
 }

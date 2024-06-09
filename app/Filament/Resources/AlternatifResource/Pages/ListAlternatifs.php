@@ -16,14 +16,14 @@ class ListAlternatifs extends ListRecords
         return [
             Actions\CreateAction::make()
                 ->label('Tambah Alternatif'),
-            Actions\ButtonAction::make('Rangking Alternatifs Table')
+            Actions\ButtonAction::make('Rangking Alternatifs Table') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('calculateLangsungRankings')
                 ->color('success')
-                ->label('Hitung Rangking'),
-            Actions\ButtonAction::make('Truncate Alternatifs Table')
+                ->label('Hitung Langsung Perangkingan'),
+            Actions\ButtonAction::make('Truncate Alternatifs Table') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('truncateAlternatifsTable')
                 ->color('danger')
-                ->label('Delete Data'),
+                ->label('Hapus Data'),
         ];
     }
 

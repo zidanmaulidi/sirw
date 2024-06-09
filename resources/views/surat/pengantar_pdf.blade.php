@@ -91,28 +91,57 @@
         <div class="body">
             <h3 style="text-align: center">SURAT PENGANTAR</h3>
             <p style="text-align: center">No: ......................................</p>
-            <p>Diberikan kepada:</p>
+            <p style="margin-left: 50px">Diberikan kepada:</p>
             @if ($surats)
-                <ul class="list-unstyled">
-                    <li><strong>Nama:</strong> {{ $surats->nama_pengaju }}</li>
-                    <li><strong>NIK:</strong> {{ $surats->NIK }}</li>
-                    <li><strong>Tempat Lahir:</strong> {{ $surats->tempat_lahir }}</li>
-                    <li><strong>Tanggal Lahir:</strong> {{ $surats->tgl_lahir }}</li>
-                    <li><strong>Pekerjaan:</strong> {{ $surats->pekerjaan }}</li>
-                    <li><strong>Status:</strong> {{ $surats->status }}</li>
-                    <li><strong>Alamat:</strong> {{ $surats->alamat }}</li>
-                    <li><strong>Keperluan:</strong> {{ $surats->keperluan }}</li>
+                <ul class="list-unstyled" style="margin-left: 50px">
+                    <table style="margin: 0 auto">
+                        <tr>
+                            <td>Nama</td>
+                            <td>: {{ $surats->nama_pengaju }}</td>
+                        </tr>
+                        <tr>
+                            <td>NIK</td>
+                            <td>: {{ $surats->NIK }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tempat Lahir</td>
+                            <td>: {{ $surats->tempat_lahir }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td>: {{ $surats->tgl_lahir }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pekerjaan</td>
+                            <td>: {{ $surats->pekerjaan }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>: {{ $surats->status }}</td>
+                        </tr>
+                        <tr>
+                            <td>Alamat</td>
+                            <td>: {{ $surats->alamat }}</td>
+                        </tr>
+                        <tr>
+                            <td>Keperluan</td>
+                            <td>: {{ $surats->keperluan }}</td>
+                        </tr>
+                    </table>
                 </ul>
             @else
                 <p>Data tidak ditemukan</p>
             @endif
 
             <br>
-            <p>Demikian surat pengantar ini kami buat untuk dapat dipergunakan sebagaimana dimaksud</p>
+            <p style="margin-left: 50px">Demikian surat pengantar ini kami buat untuk dapat dipergunakan sebagaimana
+                <br>
+                dimaksud
+            </p>
             <br>
             <br><br><br><br><br><br>
-            <br><br><br><br><br><br>
-            <table>
+
+            <table style="margin: 0 auto">
                 <thead>
                     <tr>
                         <th>Mengetahui</th>
@@ -129,10 +158,10 @@
                         <td>Ketua RT</td>
                     </tr>
                     <tr>
-                        <td> <br> <br> <br> <br>.................... </td>
+                        <td><br><br><br><br>....................</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td><br> <br> <br> <br>................... </td>
+                        <td><br><br><br><br>...................</td>
                     </tr>
                 </tbody>
             </table>

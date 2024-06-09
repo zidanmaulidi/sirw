@@ -59,22 +59,14 @@ class KegiatanResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole('admin')),
-                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
-                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\ViewAction::make(),
 
-                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt_10')),
-                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt_10')),
-                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('sekretaris_rt_10')),
+                Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole('bendahara_rw')),
+                Tables\Actions\DeleteAction::make()-> visible(fn () => !auth()->user()->hasRole('bendahara_rw')),
 
-                // Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole()),
-                // Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole()),
-                // Tables\Actions\DeleteAction::make()-> visible(fn () => !auth()->user()->hasRole()),
-
-                // EditAction::make()
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()-> visible(fn () => !auth()->user()->hasRole('bendahara_rw')),
             ]);
     }
     
@@ -93,4 +85,12 @@ class KegiatanResource extends Resource
             'edit' => Pages\EditKegiatan::route('/{record}/edit'),
         ];
     }    
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_kegiatans')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
+    }
 }

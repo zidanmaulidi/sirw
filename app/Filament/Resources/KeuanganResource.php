@@ -55,18 +55,19 @@ class KeuanganResource extends Resource
                 TextColumn::make('keterangan')->searchable(),
                 TextColumn::make('uang_masuk'),
                 TextColumn::make('uang_keluar'),
-                // TextColumn::make('saldo_kas'),
+                TextColumn::make('saldo_kas'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+
+                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
+                Tables\Actions\DeleteAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
             ]);
     }
     
@@ -91,5 +92,13 @@ class KeuanganResource extends Resource
         return [
             StatsOverview::class,
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_keuangans')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
     }
 }

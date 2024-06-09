@@ -13,7 +13,7 @@ class ListAduans extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Aduan') -> visible(fn () => auth()->user()->hasRole('admin')),
         ];
     }
 }

@@ -35,14 +35,14 @@ class PermissionSeeder extends Seeder
             'view_permissions',
 
             'view_users',
-            
-            'view_wargas_rt10',
-            'view_wargas_rt11',
+
+            'view_wargas',
 
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
             'view_aduans',
+            'view_surats',
 
             'view_domisilis',
             'view_level_users',
@@ -66,6 +66,14 @@ class PermissionSeeder extends Seeder
         $rwRole = Role::where('name', 'rw')->first();
         $rt10Role = Role::where('name', 'rt_10')->first();
         $rt11Role = Role::where('name', 'rt_11')->first();
+
+        // Retrieve roles
+        $adminRole = Role::where('name', 'admin')->first();
+        $sekretarisRwRole = Role::where('name', 'sekretaris_rw')->first();
+        $bendaharaRwRole = Role::where('name', 'bendahara_rw')->first();
+        $rwRole = Role::where('name', 'rw')->first();
+        $rt10Role = Role::where('name', 'rt_10')->first();
+        $rt11Role = Role::where('name', 'rt_11')->first();
         // $wargaRole = Role::where('name', 'warga')->first();
 
         // Assign permissions to roles
@@ -74,14 +82,14 @@ class PermissionSeeder extends Seeder
             'view_permissions',
 
             'view_users',
-            
-            'view_wargas_rt10',
-            'view_wargas_rt11',
+
+            'view_wargas',
 
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
             'view_aduans',
+            'view_surats',
 
             'view_domisilis',
             'view_level_users',
@@ -99,13 +107,37 @@ class PermissionSeeder extends Seeder
 
             // 'view_users',
 
-            'view_wargas_rt10',
-            'view_wargas_rt11',
+            'view_wargas',
 
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
             'view_aduans',
+            'view_surats',
+
+            // 'view_domisilis',
+            // 'view_level_users',
+
+            'view_criterias',
+            'view_alternatifs',
+            'view_utilitis',
+            'view_nilai_akhirs',
+            'view_rangkings',
+        ]);
+
+        $sekretarisRwRole->givePermissionTo([
+            // 'view_roles',
+            // 'view_permissions',
+
+            // 'view_users',
+
+            'view_wargas',
+
+            'view_informasis',
+            'view_keuangans',
+            'view_kegiatans',
+            'view_aduans',
+            'view_surats',
 
             // 'view_domisilis',
             // 'view_level_users',
@@ -123,19 +155,22 @@ class PermissionSeeder extends Seeder
 
             // 'view_users',
 
+            // 'view_wargas',
+
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
             'view_aduans',
+            // 'view_surats',
 
             // 'view_domisilis',
             // 'view_level_users',
 
-            'view_criterias',
-            'view_alternatifs',
-            'view_utilitis',
-            'view_nilai_akhirs',
-            'view_rangkings',
+            // 'view_criterias',
+            // 'view_alternatifs',
+            // 'view_utilitis',
+            // 'view_nilai_akhirs',
+            // 'view_rangkings',
         ]);
 
         $rt10Role->givePermissionTo([
@@ -144,12 +179,13 @@ class PermissionSeeder extends Seeder
 
             // 'view_users',
 
-            'view_wargas_rt10',
+            'view_wargas',
 
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
             'view_aduans',
+            'view_surats',
 
             // 'view_domisilis',
             // 'view_level_users',
@@ -167,12 +203,13 @@ class PermissionSeeder extends Seeder
 
             // 'view_users',
 
-            'view_wargas_rt11',
+            'view_wargas',
 
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
             'view_aduans',
+            'view_surats',
 
             // 'view_domisilis',
             // 'view_level_users',
@@ -183,6 +220,5 @@ class PermissionSeeder extends Seeder
             'view_nilai_akhirs',
             'view_rangkings',
         ]);
-                
     }
 }

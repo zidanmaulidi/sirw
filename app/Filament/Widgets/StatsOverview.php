@@ -3,6 +3,7 @@
 // namespace App\Filament\Widgets;
 
 // use App\Models\User;
+// use App\Models\Warga;
 // use Faker\Provider\Base;
 // use Filament\Widgets\StatsOverviewWidget\Card;
 // use Filament\Widgets\Widget;
@@ -16,7 +17,7 @@
 //     {
 //         return [
             
-//             Card::make('User', User::all()->count())
+//             Card::make('User', Warga::all()->count())
 //             ->color('primary')
 //             ->description('Jumlah akun')
 //             ->descriptionIcon('heroicon-o-user'),

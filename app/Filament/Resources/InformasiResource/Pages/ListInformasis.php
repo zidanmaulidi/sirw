@@ -13,7 +13,7 @@ class ListInformasis extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Informasi') -> visible(fn () => !auth()->user()->hasRole('bendahara_rw')),
         ];
     }
 }

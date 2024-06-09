@@ -45,11 +45,7 @@ class UserResource extends Resource
                         TextInput::make('name')->required(),
                         TextInput::make('email')->email()->required()->unique(ignoreRecord: true),
                         TextInput::make('password')->required(),
-<<<<<<< HEAD
-                        Select::make('roles')->multiple()->relationship('roles', 'name'),
-=======
                         select::make('roles')->multiple()->relationship('roles', 'name')->required(),
->>>>>>> Natan
                         Select::make('level_users_id')
                             ->relationship('level_users', 'level_nama')
                             ->required(),
@@ -133,5 +129,13 @@ class UserResource extends Resource
         return [
             StatsOverview::class,
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_users')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
     }
 }

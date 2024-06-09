@@ -13,7 +13,7 @@ class ListKegiatans extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Kegiatan') -> visible(fn () => !auth()->user()->hasRole('bendahara_rw')),
         ];
     }
 }

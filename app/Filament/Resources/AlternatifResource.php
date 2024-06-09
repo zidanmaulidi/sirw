@@ -120,11 +120,11 @@ class AlternatifResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'rw'])),
+                Tables\Actions\DeleteAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'rw'])),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'rw'])),
             ]);
     }
     
@@ -143,4 +143,12 @@ class AlternatifResource extends Resource
             'edit' => Pages\EditAlternatif::route('/{record}/edit'),
         ];
     }    
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_alternatifs')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
+    }
 }

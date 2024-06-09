@@ -27,5 +27,24 @@ class SuratController extends Controller
             'alamat' => 'required',
             'keperluan' => 'required',
         ]);
+
+         // Buat instance Surat dengan data yang diberikan
+         $surat = new SuratModel([
+            'nama_pengaju' => $request->nama_pengaju,
+            'NIK' => $request->NIK,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'pekerjaan' => $request->pekerjaan,
+            'status' => $request->status,
+            'alamat' => $request->alamat,
+            'keperluan' => $request->keperluan,
+        ]);
+
+        // Simpan surat ke dalam database
+        $surat->save();
+
+
+        // Redirect atau kembalikan respons sesuai kebutuhan
+        return response()->json(['success' => true, 'id' => $surat->id]);
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('status', ['Menikah', 'Belum Menikah']);
             $table->string('alamat');
             $table->string('keperluan');
+            $table->string('rt');
             $table->timestamps();
         });
     }

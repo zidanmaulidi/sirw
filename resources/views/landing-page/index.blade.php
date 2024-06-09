@@ -13,7 +13,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
-
+    <title>Landing Page </title>
+    <link rel="icon" href="img/Logo.png">
     <style>
         /* Custom CSS for background colors */
         body {
@@ -72,7 +73,7 @@
                 </li>
             </ul>
             <span class="navbar-text">
-                <a href="{{ url('/admin/login')}}" class="btn" role="button"
+                <a href="/admin/login" class="btn" role="button"
                     style="color:white; background-color: rgba(245,158,11,255)">Login</a>
             </span>
         </div>
@@ -131,14 +132,13 @@
     </div>
     {{-- jumbotron --}}
     <div class="jumbotron jumbotron-fluid"
-        style="background-image: url('{{ asset('storage/bromo2.jpg') }}'); background-size: cover; background-position: center;">
+        style="background-image: url('{{ asset('img/bromo.jpg') }}'); background-size: cover; background-position: center;">
         <div class="container">
             <h1 class="display-3" style="color: white">Kami Ada Untuk Melayani Yang Terbaik Untuk Masyarakat</h1>
             <p class="lead" style="color: white">RW O2 Desa Bunder</p>
         </div>
     </div>
-
-
+    </div>
     {{-- informasi --}}
     <h1 style="text-align: center; font-family: Arial, sans-serif; font-size: 36px; color: #333; text-shadow: 2px 2px 2px #ccc; margin-top: 50px;"
         id="informasi">INFORMASI</h1>
@@ -160,7 +160,7 @@
                             <button type="button" class="btn btn-primary" data-toggle="collapse"
                                 data-target="#multiCollapseExample{{ $information->id }}" aria-expanded="false"
                                 aria-controls="multiCollapseExample{{ $information->id }}">
-                                Baca Lebih Lanjut
+                                Selengkapnya
                             </button>
                         </div>
                     </div>
@@ -168,39 +168,47 @@
             @endforeach
         </div>
     </div>
+    <br>
     {{-- kegiatan --}}
     <h1 style="text-align: center; font-family: Arial, sans-serif; font-size: 36px; color: #333; text-shadow: 2px 2px 2px #ccc; margin-top: 50px;"
-        id="kegiatan">KEGIATAN</h1>
-    <br><br>
-    <div class="container-fluid" style="padding: 50px;">
-        <div class="row" style="display: flex; flex-wrap: wrap; justify-content: flex-start; border: 1px">
-            @foreach ($kegiatans as $kegiatan)
-                <div class="col-md-3">
-                    <div class="card mb-4 my-card">
-                        <div class="card-header">
-                            <h5 class="card-title">{{ $kegiatan->kegiatan }}</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">Waktu: {{ $kegiatan->waktu }}</p>
-                            <p class="card-text">Lokasi: {{ $kegiatan->lokasi }}</p>
-                            <p class="card-text">Peserta: {{ $kegiatan->peserta }}</p>
-                            <div class="card-text collapse multi-collapse"
-                                id="multiCollapseExample{{ $kegiatan->id }}">
-                                {!! $kegiatan->agenda !!}
-                            </div>
-                            <button type="button" class="btn btn-primary" data-toggle="collapse"
-                                data-target="#multiCollapseExample{{ $kegiatan->id }}" aria-expanded="false"
-                                aria-controls="multiCollapseExample{{ $kegiatan->id }}">Baca Lebih Lanjut
-                            </button>
-                        </div>
-                    </div>
+        id="kegiatan">KEGIATAN WARGA</h1>
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h3 class="text-center">Kegiatan Warga</h3>
+                <div class="table-responsive">
+                    <table class="table table-sm" style="font-size: 16px; margin: auto;">
+                        <thead>
+                            <tr>
+                                <th style="width: 20%;">Kegiatan</th>
+                                <th style="width: 15%;">Waktu</th>
+                                <th style="width: 15%;">Lokasi</th>
+                                <th style="width: 15%;">Peserta</th>
+                                <th style="width: 35%;">Agenda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kegiatans as $kegiatan)
+                                <tr>
+                                    <td>{{ $kegiatan->kegiatan }}</td>
+                                    <td>{{ $kegiatan->waktu }}</td>
+                                    <td>{{ $kegiatan->lokasi }}</td>
+                                    <td>{{ $kegiatan->peserta }}</td>
+                                    <td>{!! $kegiatan->agenda !!}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
 
 
     <br>
+
+
     {{-- modal struktur organisasi --}}
     <div class="modal fade" id="StrukturModal" tabindex="-1" role="dialog" aria-labelledby="StrukturModalLabel"
         aria-hidden="true">
@@ -328,10 +336,9 @@
                         <div class="table-responsive">
                             <div class="container mt-5">
                                 <h2>Form Pengajuan Surat</h2>
-                                <form action="/create/surat" method="POST" enctype="multipart/form-data"
-                                    class="needs-validation" novalidate>
+                                <form id="suratForm" enctype="multipart/form-data" class="needs-validation"
+                                    novalidate>
                                     @csrf
-
                                     <div class="form-group">
                                         <label for="nama_pengaju">Nama Lengkap</label>
                                         <input type="text" class="form-control" id="nama_pengaju"
@@ -354,7 +361,6 @@
                                         <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir"
                                             required>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="pekerjaan">Pekerjaan</label>
                                         <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"
@@ -376,8 +382,7 @@
                                         <label for="keperluan">Keperluan</label>
                                         <textarea class="form-control" id="keperluan" name="keperluan" rows="5" required></textarea>
                                     </div>
-                                    <button type="submit" id="submitButton" class="btn btn-primary"
-                                        disabled>Submit</button>
+                                    <button type="button" id="submitButton" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -390,37 +395,6 @@
         </div>
     </div>
     <BR></BR>
-    <h1 style="text-align: center; font-family: Arial, sans-serif; font-size: 36px; color: #333; text-shadow: 2px 2px 2px #ccc; margin-top: 50px;"
-        id="surat">DAFTAR PENGAJUAN SURAT</h1>
-    <br><br>
-    <div class="container container-fluid">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($surats as $surat)
-                        <tr>
-                            <td>{{ $surat->nama_pengaju }}</td>
-                            <td>
-                                <a href="{{ route('generate.pdf', ['id' => $surat->id]) }}" class="btn btn-success">
-                                    Download
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <!-- Pagination Links -->
-        <div class="d-flex justify-content-center">
-            {{ $surats->onEachSide(1)->fragment('surat')->links('vendor.pagination.bootstrap-4') }}
-        </div>
-    </div>
 
     {{-- footer --}}
     <footer class="footer bg-light mt-auto py-3">
@@ -520,6 +494,54 @@
                     'static'); // Atur posisi footer ke statis untuk mengikuti ke bawah
                 $(this).text('Tutup');
             }
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const submitButton = document.getElementById('submitButton');
+        const suratForm = document.getElementById('suratForm');
+
+        submitButton.disabled = false;
+
+        submitButton.addEventListener('click', function() {
+            let formData = new FormData(suratForm);
+
+            fetch('/create/surat', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        fetch(`/surat/generate-pdf/${data.id}`)
+                            .then(pdfResponse => {
+                                if (pdfResponse.ok) {
+                                    return pdfResponse.blob();
+                                } else {
+                                    throw new Error('Failed to generate PDF');
+                                }
+                            })
+                            .then(blob => {
+                                const url = window.URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.style.display = 'none';
+                                a.href = url;
+                                a.download = 'surat_pengajuan.pdf';
+                                document.body.appendChild(a);
+                                a.click();
+                                window.URL.revokeObjectURL(url);
+                                // Redirect to index page after download
+                                window.location.href = '/';
+                            })
+                            .catch(error => console.error('PDF Generation Error:', error));
+                    } else {
+                        // Handle validation errors or other errors
+                        console.log(data.errors);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         });
     });
 </script>

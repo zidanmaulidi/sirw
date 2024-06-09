@@ -8,16 +8,19 @@ use App\Models\Warga;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\WargaResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\WargaResource\RelationManagers;
-use Filament\Tables\Columns\ImageColumn;
+use App\Filament\Resources\WargaResource\Widgets\WargaOverview;
 
 class WargaResource extends Resource
 {
@@ -42,6 +45,10 @@ class WargaResource extends Resource
                             ->required(),
                 TextInput::make('no_KK')->required(),
                 TextInput::make('NIK')->required()->unique(ignoreRecord: true),
+                Select::make('kependudukan')->options([
+                            'warga tetap' => 'warga tetap',
+                            'warga pendatang' => 'warga pendatang',
+                        ])->required(),
                 Select::make('jenis_kelamin')->options([
                     'laki-laki' => 'laki-laki',
                     'perempuan' => 'perempuan',
@@ -76,15 +83,6 @@ class WargaResource extends Resource
                 TextColumn::make('nama_lengkap')->searchable(),
                 TextColumn::make('alamat')->searchable(),
                 TextColumn::make('no_telepon')->searchable(),
-                // TextColumn::make('no_KK')->searchable(),
-                // TextColumn::make('NIK')->searchable(),
-                // TextColumn::make('jenis_kelamin')->searchable(),
-                // TextColumn::make('tempat_lahir')->searchable(),
-                // TextColumn::make('tanggal_lahir')->searchable(),
-                // TextColumn::make('agama')->searchable(),
-                // TextColumn::make('pendidikan')->searchable(),
-                // TextColumn::make('jenis_pekerjaan')->searchable(),
-                // TextColumn::make('status')->searchable(),
                 TextColumn::make('domisilis.domisili')->label('domisili')->searchable(),
                 TextColumn::make('kependudukan')->searchable(),
                 ImageColumn::make('profile'),
@@ -92,17 +90,25 @@ class WargaResource extends Resource
             ])
             ->filters([
                 //
+                SelectFilter::make('domisilis_id')
+                    ->options([
+                        '1' => 'RT 10',
+                        '2' => 'RT 11'
+                    ]),
+                SelectFilter::make('kependudukan')
+                    ->options([
+                        'warga tetap' => 'warga tetap',
+                        'warga pendatang' => 'warga pendatang'
+                    ]),
+                
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
 
-                // role admin
-                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
-                Tables\Actions\DeleteAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
+                // role yang dapat action saja
+                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'sekretaris_rw'])),
+                Tables\Actions\DeleteAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'sekretaris_rw'])),
 
-                // role RW
-                Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole('rw')),
-                Tables\Actions\DeleteAction::make() -> visible(fn () => !auth()->user()->hasRole('rw')),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -123,5 +129,20 @@ class WargaResource extends Resource
             'create' => Pages\CreateWarga::route('/create'),
             // 'edit' => Pages\EditWarga::route('/{record}/edit'),
         ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            WargaOverview::class,
+        ];
+    }
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_wargas')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
     }
 }

@@ -14,7 +14,7 @@ class ListLevelUsers extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Tambah Level User')->visible(fn () => Auth::user()->hasRole('admin')),
         ];
     }
 

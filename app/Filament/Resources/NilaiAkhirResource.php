@@ -77,4 +77,13 @@ class NilaiAkhirResource extends Resource
             // 'edit' => Pages\EditNilaiAkhir::route('/{record}/edit'),
         ];
     }    
+
+    public static function shouldRegisterNavigation(): bool // Sembunyiin dari navigasi
+    {
+        if (auth()->user()->can('view_nilai_akhirs')) // string dalem can sesuain sama permission yang dibuat
+            return true;
+        else
+            return false;
+    }
+    
 }

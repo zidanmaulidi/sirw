@@ -14,10 +14,10 @@ class ListUtilitis extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\ButtonAction::make('Calculate Utilities')
+            Actions\ButtonAction::make('Calculate Utilities') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('calculateUtilities')
-                ->label('Calculate Utilities'),
-            Actions\ButtonAction::make('Truncate Utilities Table')
+                ->label('Hitung Tahap Utiliti'),
+            Actions\ButtonAction::make('Truncate Utilities Table') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('truncateUtilitiesTable')
                 ->color('danger')
                 ->label('Delete Data'),                
