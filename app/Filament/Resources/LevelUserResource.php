@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Illuminate\Support\Facades\Auth;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\LevelUserResource\RelationManagers;
 use App\Filament\Resources\LevelUserResource\Widgets\StatsOverview;
 
+// Memastikan session berjalan dan pengguna sudah diautentikasi sebelum memeriksa role
+// if (Auth::check() && Auth::user()->hasRole('admin')) {
 class LevelUserResource extends Resource
 {
     protected static ?string $model = LevelUser::class;
@@ -25,7 +28,33 @@ class LevelUserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Level_Nama';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Setting';
+
+    // public static function canViewAny(): bool
+    // {
+    //     return Auth::user()->hasRole('admin');
+    // }
+
+    // public static function canView(): bool
+    // {
+    //     return Auth::user()->hasRole('admin');
+    // }
+
+    // public static function canCreate(): bool
+    // {
+    //     return Auth::user()->hasRole('admin');
+    // }
+
+    // public static function canEdit($record): bool
+    // {
+    //     return Auth::user()->hasRole('admin');
+    // }
+
+    // public static function canDelete($record): bool
+    // {
+    //     return Auth::user()->hasRole('admin');
+    // }
+
 
     public static function form(Form $form): Form
     {
@@ -54,9 +83,9 @@ class LevelUserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
+                Tables\Actions\EditAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
+                Tables\Actions\DeleteAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -94,3 +123,5 @@ class LevelUserResource extends Resource
         ];
     }
 }
+
+// }

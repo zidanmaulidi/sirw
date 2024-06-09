@@ -29,13 +29,11 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?int $navigationSort = -2;
-
     protected static function getNavigationBadge(): ?string
-{
-    return static::getModel()::count();
-}
-    protected static ?string $navigationGroup = 'Data Warga';
+    {
+        return static::getModel()::count();
+    }
+    protected static ?string $navigationGroup = 'Setting';
 
     public static function form(Form $form): Form
     {
@@ -45,50 +43,44 @@ class UserResource extends Resource
                 Card::make()
                     ->schema([
                         TextInput::make('name')->required(),
-                        TextInput::make('email')->email()->required()->unique(ignoreRecord:true), 
+                        TextInput::make('email')->email()->required()->unique(ignoreRecord: true),
                         TextInput::make('password')->required(),
+<<<<<<< HEAD
                         Select::make('roles')->multiple()->relationship('roles', 'name'),
+=======
+                        select::make('roles')->multiple()->relationship('roles', 'name')->required(),
+>>>>>>> Natan
                         Select::make('level_users_id')
                             ->relationship('level_users', 'level_nama')
-                            ->required()
-                            ->reactive()
-                            ->afterStateUpdated(function ($state, callable $set) {
-                                if (in_array($state, [1, 2])) { // Assuming level 1 and 2 are admin and rw
-                                    $set('domisilis_id', null);
-                                }
-                            }),
-                        Select::make('domisilis_id')
-                            ->relationship('domisilis', 'domisili') // domisilis id select 1 or 2
-                            ->required()
-                            ->visible(fn ($get) => !in_array($get('level_users_id'), [1, 2])),
-                        select::make('roles')->multiple()->relationship('roles','name')->required(),
-                        Select::make('kependudukan')->options([
-                            'warga tetap' => 'warga tetap',
-                            'warga pendatang' => 'warga pendatang',
-                        ])->required(),
-                        TextInput::make('no_KK')->required(),
-                        TextInput::make('NIK')->required()->unique(ignoreRecord:true),
-                        Select::make('jenis_kelamin')->options([
-                            'laki-laki' => 'laki-laki',
-                            'perempuan' => 'perempuan',
-                        ])->required(),
-                        TextInput::make('tempat_lahir')->required(),
-                        DatePicker::make('tanggal_lahir')->required(),
-                        Select::make('agama')->options([
-                            'islam' => 'islam',
-                            'protestan' => 'protestan',
-                            'katholik' => 'katholik',
-                            'hindu' => 'hindu',
-                            'budha' => 'budha',
-                            'khonghucu' => 'khonghucu',
-                        ])->required(),
-                        TextInput::make('pendidikan')->required(),
-                        TextInput::make('jenis_pekerjaan')->required(),
-                        Select::make('status')->options([
-                            'kawin' => 'kawin',
-                            'belum kawin' => 'belum kawin',
-                        ])->required(),
-                        FileUpload::make('profile')->required()->directory('users_image')->visibility('public'),
+                            ->required(),
+
+                        // Select::make('kependudukan')->options([
+                        //     'warga tetap' => 'warga tetap',
+                        //     'warga pendatang' => 'warga pendatang',
+                        // ])->required(),
+                        // TextInput::make('no_KK')->required(),
+                        // TextInput::make('NIK')->required()->unique(ignoreRecord:true),
+                        // Select::make('jenis_kelamin')->options([
+                        //     'laki-laki' => 'laki-laki',
+                        //     'perempuan' => 'perempuan',
+                        // ])->required(),
+                        // TextInput::make('tempat_lahir')->required(),
+                        // DatePicker::make('tanggal_lahir')->required(),
+                        // Select::make('agama')->options([
+                        //     'islam' => 'islam',
+                        //     'protestan' => 'protestan',
+                        //     'katholik' => 'katholik',
+                        //     'hindu' => 'hindu',
+                        //     'budha' => 'budha',
+                        //     'khonghucu' => 'khonghucu',
+                        // ])->required(),
+                        // TextInput::make('pendidikan')->required(),
+                        // TextInput::make('jenis_pekerjaan')->required(),
+                        // Select::make('status')->options([
+                        //     'kawin' => 'kawin',
+                        //     'belum kawin' => 'belum kawin',
+                        // ])->required(),
+                        // FileUpload::make('profile')->required()->directory('users_image')->visibility('public'),
 
                     ])
                     ->columns(2),
@@ -102,20 +94,10 @@ class UserResource extends Resource
                 TextColumn::make('id')->searchable()->sortable(),
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('email')->searchable(),
-                // TextColumn::make('password'),
+                // TextColumn::make('role')->searchable(),
+
                 TextColumn::make('level_users.level_nama')->label('level')->searchable(),
-                TextColumn::make('domisilis.domisili')->searchable(),
-                TextColumn::make('kependudukan')->searchable(),
-                // TextColumn::make('no_KK')->searchable(),
-                // TextColumn::make('NIK')->searchable(),
-                // TextColumn::make('jenis_kelamin')->searchable(),
-                // TextColumn::make('tempat_lahir')->searchable(),
-                // TextColumn::make('tanggal_lahir')->searchable(),
-                // TextColumn::make('agama')->searchable(),
-                // TextColumn::make('pendidikan')->searchable(),
-                // TextColumn::make('jenis_pekerjaan')->searchable(),
-                // TextColumn::make('status')->searchable(),
-                ImageColumn::make('profile')->square(),
+
             ])
             ->filters([
                 //
