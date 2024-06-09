@@ -17,12 +17,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
         // Filter warga berdasarkan roles user
-    protected static function booted()
-    {
-        parent::booted();
+    // protected static function booted()
+    // {
+    //     parent::booted();
 
-        static::addGlobalScope(new RTScope);
-    }
+    //     static::addGlobalScope(new RTScope);
+    // }
 
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -36,18 +36,20 @@ class User extends Authenticatable
         'email',
         'password',
         'level_users_id',
-        'domisilis_id',
-        'kependudukan',
-        'no_KK',
-        'NIK',
-        'jenis_kelamin',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'agama',
-        'pendidikan',
-        'jenis_pekerjaan',
-        'status',
-        'profile'
+        'role',
+
+        // 'domisilis_id',
+        // 'kependudukan',
+        // 'no_KK',
+        // 'NIK',
+        // 'jenis_kelamin',
+        // 'tempat_lahir',
+        // 'tanggal_lahir',
+        // 'agama',
+        // 'pendidikan',
+        // 'jenis_pekerjaan',
+        // 'status',
+        // 'profile'
     ];
 
     /**
@@ -75,10 +77,10 @@ class User extends Authenticatable
         return $this->belongsTo(LevelUser::class, 'level_users_id');
     }
 
-    public function domisilis(): BelongsTo
-    {
-        return $this->belongsTo(Domisili::class, 'domisilis_id');
-    }
+    // public function domisilis(): BelongsTo
+    // {
+    //     return $this->belongsTo(Domisili::class, 'domisilis_id');
+    // }
 
     public function informasi(): HasMany
     {
@@ -88,7 +90,7 @@ class User extends Authenticatable
     // Implement FilamentUser method
     public function canAccessFilament(): bool
     {
-        return $this->hasRole(['admin', 'rw', 'rt', 'warga']); // Adjust roles as necessary
+        return $this->hasRole(['admin', 'rw','sekretaris_rw','bendahara_rw','rt_10','rt_11']); // Adjust roles as necessary
     }
 
 }

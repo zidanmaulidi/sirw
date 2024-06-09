@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\AduanResource\Pages\EditAduan;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Kegiatan;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\KegiatanResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\KegiatanResource\RelationManagers;
+use Filament\Tables\Actions\EditAction;
 
 class KegiatanResource extends Resource
 {
@@ -57,15 +59,19 @@ class KegiatanResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole('admin')),
                 Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
                 Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('admin')),
-                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
-                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
-                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
-                Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
-                Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
-                Tables\Actions\DeleteAction::make()-> visible(fn () => !auth()->user()->hasRole('warga')),
+
+                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt_10')),
+                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt_10')),
+                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('sekretaris_rt_10')),
+
+                // Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole()),
+                // Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole()),
+                // Tables\Actions\DeleteAction::make()-> visible(fn () => !auth()->user()->hasRole()),
+
+                // EditAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

@@ -72,7 +72,7 @@
                 </li>
             </ul>
             <span class="navbar-text">
-                <a href="/admin/login" class="btn" role="button"
+                <a href="{{ url('/admin/login')}}" class="btn" role="button"
                     style="color:white; background-color: rgba(245,158,11,255)">Login</a>
             </span>
         </div>

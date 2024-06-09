@@ -15,8 +15,15 @@ class Domisili extends Model
         'domisili',
     ];
 
-    public function users(): HasMany
+    // public function users(): HasMany
+    // {
+    //     return $this->hasMany(User::class, 'domisilis_id');
+    // }
+
+    public function wargas(): HasMany
     {
-        return $this->hasMany(User::class, 'domisilis_id');
+        return $this->hasMany(Warga::class, 'domisilis_id');
     }
+
+    
 }

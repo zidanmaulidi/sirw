@@ -18,10 +18,11 @@ class PermissionSeeder extends Seeder
         $roles = [
             'admin',
             'rw',
-            'rt',
-            'sekretaris_rt',
-            'bendahara_rt',
-            'warga',
+            'sekretaris_rw',
+            'bendahara_rw',
+            'rt_10',
+            'rt_11',
+            // 'warga',
         ];
 
         // Create roles if they do not exist
@@ -35,10 +36,14 @@ class PermissionSeeder extends Seeder
             'view_permissions',
 
             'view_users',
+            
+            'view_wargas_rt10',
+            'view_wargas_rt11',
 
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
+            'view_aduans',
 
             'view_domisilis',
             'view_level_users',
@@ -57,11 +62,12 @@ class PermissionSeeder extends Seeder
 
         // Retrieve roles
         $adminRole = Role::where('name', 'admin')->first();
-        $sekretarisRtRole = Role::where('name', 'sekretaris_rt')->first();
-        $bendaharaRtRole = Role::where('name', 'bendahara_rt')->first();
+        $sekretarisRwRole = Role::where('name', 'sekretaris_rw')->first();
+        $bendaharaRwRole = Role::where('name', 'bendahara_rw')->first();
         $rwRole = Role::where('name', 'rw')->first();
-        $rtRole = Role::where('name', 'rt')->first();
-        $wargaRole = Role::where('name', 'warga')->first();
+        $rt10Role = Role::where('name', 'rt_10')->first();
+        $rt11Role = Role::where('name', 'rt_11')->first();
+        // $wargaRole = Role::where('name', 'warga')->first();
 
         // Assign permissions to roles
         $adminRole->givePermissionTo([
@@ -69,53 +75,17 @@ class PermissionSeeder extends Seeder
             'view_permissions',
 
             'view_users',
+            
+            'view_wargas_rt10',
+            'view_wargas_rt11',
 
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
+            'view_aduans',
 
             'view_domisilis',
             'view_level_users',
-
-            'view_criterias',
-            'view_alternatifs',
-            'view_utilitis',
-            'view_nilai_akhirs',
-            'view_rangkings',
-        ]);
-
-        $sekretarisRtRole->givePermissionTo([
-            // 'view_roles',
-            // 'view_permissions',
-
-            'view_users',
-
-            'view_informasis',
-            'view_keuangans',
-            'view_kegiatans',
-
-            // 'view_domisilis',
-            // 'view_level_users',
-
-            'view_criterias',
-            'view_alternatifs',
-            'view_utilitis',
-            'view_nilai_akhirs',
-            'view_rangkings',
-        ]);
-
-        $bendaharaRtRole->givePermissionTo([
-            // 'view_roles',
-            // 'view_permissions',
-
-            'view_users',
-
-            'view_informasis',
-            'view_keuangans',
-            'view_kegiatans',
-
-            // 'view_domisilis',
-            // 'view_level_users',
 
             'view_criterias',
             'view_alternatifs',
@@ -128,11 +98,15 @@ class PermissionSeeder extends Seeder
             // 'view_roles',
             // 'view_permissions',
 
-            'view_users',
+            // 'view_users',
+
+            'view_wargas_rt10',
+            'view_wargas_rt11',
 
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
+            'view_aduans',
 
             // 'view_domisilis',
             // 'view_level_users',
@@ -144,27 +118,7 @@ class PermissionSeeder extends Seeder
             'view_rangkings',
         ]);
 
-        $rtRole->givePermissionTo([
-            // 'view_roles',
-            // 'view_permissions',
-
-            'view_users',
-
-            'view_informasis',
-            'view_keuangans',
-            'view_kegiatans',
-
-            // 'view_domisilis',
-            // 'view_level_users',
-
-            'view_criterias',
-            'view_alternatifs',
-            'view_utilitis',
-            'view_nilai_akhirs',
-            'view_rangkings',
-        ]);
-
-        $wargaRole->givePermissionTo([
+        $bendaharaRwRole->givePermissionTo([
             // 'view_roles',
             // 'view_permissions',
 
@@ -173,6 +127,7 @@ class PermissionSeeder extends Seeder
             'view_informasis',
             'view_keuangans',
             'view_kegiatans',
+            'view_aduans',
 
             // 'view_domisilis',
             // 'view_level_users',
@@ -183,6 +138,73 @@ class PermissionSeeder extends Seeder
             'view_nilai_akhirs',
             'view_rangkings',
         ]);
+
+        $rt10Role->givePermissionTo([
+            // 'view_roles',
+            // 'view_permissions',
+
+            // 'view_users',
+
+            'view_wargas_rt10',
+
+            'view_informasis',
+            'view_keuangans',
+            'view_kegiatans',
+            'view_aduans',
+
+            // 'view_domisilis',
+            // 'view_level_users',
+
+            'view_criterias',
+            'view_alternatifs',
+            'view_utilitis',
+            'view_nilai_akhirs',
+            'view_rangkings',
+        ]);
+
+        $rt11Role->givePermissionTo([
+            // 'view_roles',
+            // 'view_permissions',
+
+            // 'view_users',
+
+            'view_wargas_rt11',
+
+            'view_informasis',
+            'view_keuangans',
+            'view_kegiatans',
+            'view_aduans',
+
+            // 'view_domisilis',
+            // 'view_level_users',
+
+            'view_criterias',
+            'view_alternatifs',
+            'view_utilitis',
+            'view_nilai_akhirs',
+            'view_rangkings',
+        ]);
+        
+
+        // $wargaRole->givePermissionTo([
+        //     // 'view_roles',
+        //     // 'view_permissions',
+
+        //     // 'view_users',
+
+        //     'view_informasis',
+        //     'view_keuangans',
+        //     'view_kegiatans',
+
+        //     // 'view_domisilis',
+        //     // 'view_level_users',
+
+        //     'view_criterias',
+        //     'view_alternatifs',
+        //     'view_utilitis',
+        //     'view_nilai_akhirs',
+        //     'view_rangkings',
+        // ]);
         
     }
 }

@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\InformasiResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\InformasiResource\RelationManagers;
+use Filament\Pages\Actions\ViewAction as ActionsViewAction;
+use Filament\Tables\Columns\Layout\View;
 
 class InformasiResource extends Resource
 {
@@ -64,15 +66,17 @@ class InformasiResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
-                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
-                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('admin')),
-                Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
-                Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
-                Tables\Actions\DeleteAction::make()-> visible(fn () => !auth()->user()->hasRole('warga')),
-                Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
-                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
-                Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
+                Tables\Actions\ViewAction::make(),
+
+                // Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('admin')),
+                Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole('admin')),
+                // Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('admin')),
+                // Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
+                // Tables\Actions\EditAction::make() -> visible(fn () => !auth()->user()->hasRole('warga')),
+                // Tables\Actions\DeleteAction::make()-> visible(fn () => !auth()->user()->hasRole('warga')),
+                // Tables\Actions\ViewAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
+                // Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
+                // Tables\Actions\DeleteAction::make()-> visible(fn () => auth()->user()->hasRole('sekretaris_rt')),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -91,7 +95,7 @@ class InformasiResource extends Resource
         return [
             'index' => Pages\ListInformasis::route('/'),
             'create' => Pages\CreateInformasi::route('/create'),
-            'edit' => Pages\EditInformasi::route('/{record}/edit'),
+            // 'edit' => Pages\EditInformasi::route('/{record}/edit'),
         ];
     }    
 }
