@@ -19,7 +19,6 @@ class Level_usersSeeder extends Seeder
             ['level_kode' => 'RW', 'level_nama' => 'RW'],
             ['level_kode' => 'PRW', 'level_nama' => 'Pengurus RW'],
             ['level_kode' => 'RT', 'level_nama' => 'RT'],
-            // ['level_kode' => 'WRG', 'level_nama' => 'Warga'],
         ]);
     }
 }

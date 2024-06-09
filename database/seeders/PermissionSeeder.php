@@ -22,7 +22,6 @@ class PermissionSeeder extends Seeder
             'bendahara_rw',
             'rt_10',
             'rt_11',
-            // 'warga',
         ];
 
         // Create roles if they do not exist
@@ -184,27 +183,6 @@ class PermissionSeeder extends Seeder
             'view_nilai_akhirs',
             'view_rangkings',
         ]);
-        
-
-        // $wargaRole->givePermissionTo([
-        //     // 'view_roles',
-        //     // 'view_permissions',
-
-        //     // 'view_users',
-
-        //     'view_informasis',
-        //     'view_keuangans',
-        //     'view_kegiatans',
-
-        //     // 'view_domisilis',
-        //     // 'view_level_users',
-
-        //     'view_criterias',
-        //     'view_alternatifs',
-        //     'view_utilitis',
-        //     'view_nilai_akhirs',
-        //     'view_rangkings',
-        // ]);
-        
+                
     }
 }
