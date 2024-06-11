@@ -84,7 +84,7 @@
         <div class="header">
             <h3>SURAT PENGANTAR</h3>
             <p>DESA SIDORAHAYU, KECAMATAN WAGIR, DUSUN BUNDER</p>
-            <p>RUKUN TETANGGA 010, RUKUN WARGA 002</p>
+            <p>RUKUN TETANGGA ...., RUKUN WARGA 002</p>
             <hr>
         </div>
 

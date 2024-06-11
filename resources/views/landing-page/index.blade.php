@@ -44,7 +44,7 @@
 
 <body style="background-color: white">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <a class="navbar-brand" href="#">SI RW</a>
+        <a class="navbar-brand" href="#">SIRW</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -176,7 +176,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h3 class="text-center">Kegiatan Warga</h3>
                 <div class="table-responsive">
                     <table class="table table-sm" style="font-size: 16px; margin: auto;">
                         <thead>
@@ -229,17 +228,7 @@
                                 <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
                                     <div class="card-header">RW</div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Nama RW</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-auto">
-                                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                                    <div class="card-header">RT</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nama RT</h5>
+                                        <h5 class="card-title"> RW 02</h5>
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +238,7 @@
                                 <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
                                     <div class="card-header">Sekretaris</div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Nama Sekretaris</h5>
+                                        <h5 class="card-title"> Sekretaris RW</h5>
                                     </div>
                                 </div>
                             </div>
@@ -257,7 +246,18 @@
                                 <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
                                     <div class="card-header">Bendahara</div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Nama Bendahara</h5>
+                                        <h5 class="card-title"> Bendahara RW</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card-header">RT</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"> RT 10</h5>
+                                        <h5 class="card-title"> RT 11</h5>
                                     </div>
                                 </div>
                             </div>
@@ -270,6 +270,7 @@
             </div>
         </div>
     </div>
+
     {{-- modal form pengaduan --}}
     <div class="modal fade" id="AduanModal" tabindex="-1" role="dialog" aria-labelledby="AduanModalLabel"
         aria-hidden="true">
