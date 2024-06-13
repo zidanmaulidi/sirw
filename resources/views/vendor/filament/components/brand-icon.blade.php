@@ -16,4 +16,4 @@
         }}
     </div>
 @endif --}}
-<img src="{{ asset('LOGO/SIRWlogo.PNG')}}" alt="logo" class="h-10">
+<img src="{{ asset('LOGO/SIRWlogo.png')}}" alt="logo" class="h-10">

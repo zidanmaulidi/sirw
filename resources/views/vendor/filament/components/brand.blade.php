@@ -9,4 +9,4 @@
     </div>
 @endif --}}
 
-<img src="{{ asset('LOGO/logo.PNG')}}" alt="logo" width="180px">
+<img src="{{ asset('LOGO/logo.png')}}" alt="logo" width="180px">
