@@ -1,4 +1,4 @@
-@if (filled($brand = config('filament.brand')))
+{{-- @if (filled($brand = config('filament.brand')))
     <div
         @class([
             'filament-brand text-xl font-bold tracking-tight',
@@ -15,4 +15,5 @@
                 ->implode('')
         }}
     </div>
-@endif
+@endif --}}
+{{-- <img src="{{ asset('storage/LOGO/SIRWlogo.PNG')}}" alt="logo" class="h-10"> --}}

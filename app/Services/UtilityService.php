@@ -13,9 +13,6 @@ class UtilityService
     public function calculateAndFillUtilities()
     {
         $alternatifs = Alternatif::all();
-
-        // $min = ['kondisi_rumah' => 50, 'kondisi_air' => 50, 'penghasilan' => 50, 'tegangan_listrik' => 75, 'pendidikan' => 25, 'pekerjaan' => 40, 'sumber_air' => 50, 'bahan_bakar_memasak' => 50,'umur' => 25, 'tanggungan' => 25];
-        // $max = ['kondisi_rumah' => 100, 'kondisi_air' => 100, 'penghasilan' => 100, 'tegangan_listrik' => 100, 'pendidikan' => 100, 'pekerjaan' => 100, 'sumber_air' => 100, 'bahan_bakar_memasak' => 100,'umur' => 100, 'tanggungan' => 100 ];
     
         $min = [
             'kondisi_rumah' => Alternatif::min('kondisi_rumah'), 
@@ -41,18 +38,9 @@ class UtilityService
             'umur' => Alternatif::max('umur'), 
             'tanggungan' => Alternatif::max('tanggungan')
         ];
-        // $max = ['kondisi_rumah' => 100, 'kondisi_air' => 100, 'penghasilan' => 100, 'tegangan_listrik' => 100, 'pendidikan' => 100, 'pekerjaan' => 100, 'sumber_air' => 100, 'bahan_bakar_memasak' => 100,'umur' => 100, 'tanggungan' => 100 ];
-
-        // $min = Alternatif::min(['kondisi_rumah', 'kondisi_air', 'penghasilan', 'tegangan_listrik', 'pendidikan','pekerjaan', 'sumber_air', 'bahan_bakar_memasak', 'umur', 'tanggungan']);
-
-        // $max = Alternatif::max(['kondisi_rumah', 'kondisi_air', 'penghasilan', 'tegangan_listrik', 'pendidikan','pekerjaan', 'sumber_air', 'bahan_bakar_memasak', 'umur', 'tanggungan']);
 
         $costCriteria = ['kondisi_rumah', 'kondisi_air', 'penghasilan', 'tegangan_listrik', 'pendidikan', 'pekerjaan', 'sumber_air', 'bahan_bakar_memasak'];
         $benefitCriteria = ['umur', 'tanggungan'];
-
-
-        
-
 
         foreach ($alternatifs as $alternatif) {
             $utility = Utiliti::updateOrCreate(
@@ -74,12 +62,14 @@ class UtilityService
 
     private function calculateCostUtility($value, $min, $max)
     {
-        return (($max - $value) / ($max - $min));
+        // return (($max - $value) / ($max - $min));
+        return (($value - $min) / ($max - $min));
     }
             
     private function calculateBenefitUtility($value, $min, $max)
     {
-        return (($value - $min) / ($max - $min));
+        // return (($value - $min) / ($max - $min));
+        return (($max - $value) / ($max - $min));
     }
 
     // fungsi mengosongkan data utiliti
@@ -88,21 +78,25 @@ class UtilityService
         DB::table('utilitis')->truncate();
     }
 
+    // fungsi mengosongkan data alternatif
     public function truncateAlternatifsTable()
     {
         DB::table('alternatifs')->truncate();
     }
 
+    // fungsi mengosongkan data nilai akhir
     public function truncateNilaiAkhirsTable()
     {
         DB::table('nilai_akhirs')->truncate();
     }
 
+    // fungsi mengosongkan data rangking
     public function truncateRankingsTable()
     {
         DB::table('rangkings')->truncate();
     }
 
+    // fungsi menghitung final score
     public function calculateFinalScores()
     {
         // Ambil data utiliti dari tabel utilitis

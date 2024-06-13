@@ -18,7 +18,7 @@ class RangkingResource extends Resource
 {
     protected static ?string $model = Rangking::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-puzzle';
+    protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
 
     protected static ?string $navigationGroup = 'Bantuan Sosial';
 

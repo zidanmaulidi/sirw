@@ -20,7 +20,7 @@ class ListUtilitis extends ListRecords
             Actions\ButtonAction::make('Truncate Utilities Table') -> visible(fn () => auth()->user()->hasRole(['admin','rw']))
                 ->action('truncateUtilitiesTable')
                 ->color('danger')
-                ->label('Delete Data'),                
+                ->label('Hapus Data'),                
         ];
     }
     public function calculateUtilities()
@@ -28,13 +28,13 @@ class ListUtilitis extends ListRecords
         $service = new UtilityService();
         $service->calculateAndFillUtilities();
 
-        $this->notify('success', 'Utilities calculated and table filled successfully.');
+        $this->notify('success', 'Tahap Utiliti berhasil dihitung');
     }
     public function truncateUtilitiesTable()
     {
         $service = new UtilityService();
         $service->truncateUtilitiesTable();
 
-        $this->notify('success', 'Utilities table truncated successfully.');
+        $this->notify('success', 'Data Utiliti berhasil dihapus');
     }
 }

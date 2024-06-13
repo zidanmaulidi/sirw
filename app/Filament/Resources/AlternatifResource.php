@@ -74,8 +74,8 @@ class AlternatifResource extends Resource
                     50 => 'PDAM' 
                     ])->required(),
                 Select::make('bahan_bakar_memasak')->options([
-                    100 => 'LPG' ,
-                    50 => 'kayu bakar' 
+                    100 => 'kayu bakar' ,
+                    50 => 'LPG' 
                     ])->required(),
                 Select::make('umur')
                 ->options([

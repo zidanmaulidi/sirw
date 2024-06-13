@@ -82,10 +82,10 @@ class User extends Authenticatable
     //     return $this->belongsTo(Domisili::class, 'domisilis_id');
     // }
 
-    public function informasi(): HasMany
-    {
-        return $this->hasMany(Informasi::class);
-    }
+    // public function informasi(): HasMany
+    // {
+    //     return $this->hasMany(Informasi::class, 'users_id');
+    // }
 
     // Implement FilamentUser method
     public function canAccessFilament(): bool

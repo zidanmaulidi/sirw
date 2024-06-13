@@ -57,7 +57,7 @@ class AduanResource extends Resource
                 TextColumn::make('nama_pengadu'),
                 TextColumn::make('aduan'),
                 ImageColumn::make('bukti'),
-                TextColumn::make('updated_at'),
+                TextColumn::make('created_at')->label('Waktu Pengaduan'),
 
             ])
             ->filters([
@@ -85,7 +85,7 @@ class AduanResource extends Resource
         return [
             'index' => Pages\ListAduans::route('/'),
             'create' => Pages\CreateAduan::route('/create'),
-            'edit' => Pages\EditAduan::route('/{record}/edit'),
+            // 'edit' => Pages\EditAduan::route('/{record}/edit'),
         ];
     }    
 

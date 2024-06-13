@@ -9,9 +9,11 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\KeuanganResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +25,7 @@ class KeuanganResource extends Resource
     protected static ?string $model = Keuangan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cash';
-    
+
     protected static ?string $navigationLabel = 'Keuangan';
 
     protected static ?string $navigationGroup = 'Menu';
@@ -63,29 +65,29 @@ class KeuanganResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
 
-                Tables\Actions\EditAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
-                Tables\Actions\DeleteAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
+                Tables\Actions\EditAction::make()->visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
+                Tables\Actions\DeleteAction::make()->visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
+                Tables\Actions\DeleteBulkAction::make()->visible(fn () => auth()->user()->hasRole(['admin', 'bendahara_rw'])),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListKeuangans::route('/'),
             'create' => Pages\CreateKeuangan::route('/create'),
-            'edit' => Pages\EditKeuangan::route('/{record}/edit'),
+            // 'edit' => Pages\EditKeuangan::route('/{record}/edit'),
         ];
-    }    
+    }
 
     public static function getWidgets(): array
     {

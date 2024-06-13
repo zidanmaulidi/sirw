@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Informasi;
+use App\Models\Utiliti;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -14,7 +15,7 @@ class InformasisPolicy
 
     // Peran yang hanya bisa mengedit atau menghapus informasi yang mereka buat
     protected array $restrictedRoles = [
-        'rw', 'sekretaris_rw', 'bendahara_rw', 'rt_10', 'rt_11'
+        'admin','rw', 'sekretaris_rw', 'bendahara_rw', 'rt_10', 'rt_11'
     ];
 
     /**
@@ -52,6 +53,10 @@ class InformasisPolicy
         // if ($user->id == $informasi-> id ) {
         //     return true;
         // }
+
+        // if ($user->id == $informasi-> id) {
+        //     return true;
+        // }
         
         return true;
         //
@@ -82,7 +87,7 @@ class InformasisPolicy
         //
         // // Admin dapat menghapus apa saja
         // if ($user->hasRole('admin')) {
-        //     return true;
+            return true;
         // }
 
         // // Pengguna dengan peran tertentu hanya bisa menghapus informasi yang mereka buat
@@ -93,10 +98,10 @@ class InformasisPolicy
         //        (in_array($user->role, $user->restrictedRoles) && $user->id === $informasi->created_by);
 
         // Check if $user->role is an array or string
-        $roles = $this->restrictedRoles;
+        // $roles = $this->restrictedRoles;
 
-        return $user->hasRole('admin') ||
-               (in_array($user->role, $roles) && $user->id === $informasi->created_by);
+        // return $user->hasRole('admin') ||
+        //        (in_array($user->role, $roles) && $user->id === $informasi->created_by);
     }
 
     /**
@@ -105,8 +110,8 @@ class InformasisPolicy
     public function restore(User $user, Informasi $information): bool
     {
         //
-        // return true;
-        return $user->hasRole('admin');
+        return true;
+        // return $user->hasRole('admin');
     }
 
     /**
@@ -115,8 +120,8 @@ class InformasisPolicy
     public function forceDelete(User $user, Informasi $information): bool
     {
         //
-        // return true;
-        return $user->hasRole('admin');
+        return true;
+        // return $user->hasRole('admin');
     }
 
     

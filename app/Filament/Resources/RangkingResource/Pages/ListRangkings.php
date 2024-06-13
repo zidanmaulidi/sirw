@@ -35,7 +35,7 @@ class ListRangkings extends ListRecords
         $service = new UtilityService();
         $service->calculateRankings();
 
-        $this->notify('success', 'Rankings calculated and table filled successfully.');
+        $this->notify('success', 'Perangkingan berhasil dihitung');
     }
 
     public function calculateLangsungRankings()
@@ -43,7 +43,7 @@ class ListRangkings extends ListRecords
         $service = new UtilityService();
         $service->calculateLangsungRankings();
 
-        $this->notify('success', 'Langsung Rankings calculated and table filled successfully.');
+        $this->notify('success', 'Perangkingan Langsung berhasil dihitung');
     }
 
     public function truncateRankingsTable()
@@ -51,6 +51,6 @@ class ListRangkings extends ListRecords
         $service = new UtilityService();
         $service->truncateRankingsTable();
 
-        $this->notify('success', 'Rankings table truncated successfully.');
+        $this->notify('success', 'Data Rangking berhasil dihapus');
     }
 }

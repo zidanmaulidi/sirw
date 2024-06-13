@@ -47,7 +47,7 @@ class InformasiResource extends Resource
                         TextInput::make('title')->required(),
                         RichEditor::make('content')->required(),
                         FileUpload::make('thumbnail')->directory('informasis_image')->visibility('public'),
-                        TextInput::make('users_id')->default(Auth::id())->hidden(),
+                        // TextInput::make('users_id')->default(Auth::id())->hidden(),
                     ])
             ]);
     }
@@ -58,10 +58,10 @@ class InformasiResource extends Resource
             ->columns([
                 //
                 TextColumn::make('id')->searchable()->sortable(),
-                TextColumn::make('title')->searchable(),
-                ImageColumn::make('thumbnail'),
-                TextColumn::make('updated_at'),
-                TextColumn::make('users.name')->label('auth')->searchable(),
+                TextColumn::make('title')->searchable()->label('Judul'),
+                ImageColumn::make('thumbnail')->label('Sampul'),
+                TextColumn::make('updated_at')->label('Terakhir Diperbarui'),
+                // TextColumn::make('users.name')->label('Pembuat')->searchable(),
             ])
             ->filters([
                 //

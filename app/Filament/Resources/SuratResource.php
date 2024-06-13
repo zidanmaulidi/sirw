@@ -115,21 +115,17 @@ class SuratResource extends Resource
 
         return $table
             ->columns([
-                TextColumn::make('id')->label('ID'),
-                TextColumn::make('NIK')->label('NIK'),
-                TextColumn::make('tempat_lahir')->label('Tempat Lahir'),
-                TextColumn::make('tgl_lahir')->label('Tanggal Lahir'),
-                TextColumn::make('pekerjaan')->label('Pekerjaan'),
-                TextColumn::make('status')->label('Status'),
-                TextColumn::make('alamat')->label('Alamat'),
-                TextColumn::make('keperluan')->label('Keperluan')
-
+                TextColumn::make('id'),
+                TextColumn::make('nama_pengaju')->searchable(),
+                TextColumn::make('alamat'),
+                TextColumn::make('pekerjaan'),                
+                TextColumn::make('updated_at')->label('Tanggal Pengajuan')->searchable()->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make() -> visible(fn () => !auth()->user()->hasRole(['bendahara_rw'])),
 
                 Tables\Actions\DeleteAction::make() -> visible(fn () => auth()->user()->hasRole(['admin', 'sekretaris_rw'])),
 
@@ -152,7 +148,7 @@ class SuratResource extends Resource
         return [
             'index' => Pages\ListSurats::route('/'),
             'create' => Pages\CreateSurat::route('/create'),
-            'edit' => Pages\EditSurat::route('/{record}/edit'),
+            // 'edit' => Pages\EditSurat::route('/{record}/edit'),
 
         ];
     }

@@ -15,13 +15,13 @@ class Informasi extends Model
         'title',
         'content',
         'thumbnail',
-        'users_id'
+        // 'users_id'
     ];
 
-    public function users() : BelongsTo
-    {
-        return $this->belongsTo(User::class, 'users_id');
-    }
+    // public function users() : BelongsTo
+    // {
+    //     return $this->belongsTo(User::class, 'users_id');
+    // }
 
     // // Fungsi untuk menyimpan ID pengguna saat membuat informasi
     // public static function boot()

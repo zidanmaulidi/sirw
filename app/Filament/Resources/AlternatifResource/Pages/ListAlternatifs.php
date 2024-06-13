@@ -32,7 +32,7 @@ class ListAlternatifs extends ListRecords
         $service = new UtilityService();
         $service->truncateAlternatifsTable();
 
-        $this->notify('success', 'Alternatif table truncated successfully.');
+        $this->notify('success', 'Data Alternatif berhasil dihapus');
     }
 
     public function calculateLangsungRankings()
@@ -40,6 +40,6 @@ class ListAlternatifs extends ListRecords
         $service = new UtilityService();
         $service->calculateLangsungRankings();
 
-        $this->notify('success', 'Langsung Rankings calculated and table filled successfully.');
+        $this->notify('success', 'Perangkingan Langsung berhasil dihitung');
     }
 }

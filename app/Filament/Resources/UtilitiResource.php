@@ -18,7 +18,7 @@ class UtilitiResource extends Resource
 {
     protected static ?string $model = Utiliti::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-puzzle';
+    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-line';
 
     protected static ?string $navigationGroup = 'Bantuan Sosial';
 

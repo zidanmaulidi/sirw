@@ -19,6 +19,8 @@
         /* Custom CSS for background colors */
         body {
             background-color: #f8f9fa;
+            max-width: 100%;
+            height: auto;
             /* Light Gray */
         }
 
@@ -26,8 +28,6 @@
             background-color: #ffffff;
             /* White */
         }
-
-
 
         footer.footer {
             background-color: #f8f9fa;
@@ -39,18 +39,28 @@
             border-top: 1px solid #dee2e6;
             /* Light Gray border on top */
         }
+
+        .rounded-card {
+        border-radius: 5px; /* Sudut melengkung */
+        overflow: hidden; /* Agar konten di dalam tidak keluar dari batas kartu */
+        }
+
+        .shadow-card{
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
     </style>
 </head>
 
 <body style="background-color: white">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <a class="navbar-brand" href="#">SIRW</a>
+        <a class="navbar-brand" href="#"><img src="{{ asset('storage/LOGO/logo.PNG')}}" alt="logo" width="180px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarText">
+            <ul class="navbar-nav ">
                 <li class="nav-item">
                     <a class="nav-link" href="#informasi">Informasi</a>
                 </li>
@@ -72,6 +82,7 @@
                         Surat</a>
                 </li>
             </ul>
+            <ul></ul>
             <span class="navbar-text">
                 <a href="/admin/login" class="btn" role="button"
                     style="color:white; background-color: rgba(245,158,11,255)">Login</a>
@@ -132,7 +143,7 @@
     </div>
     {{-- jumbotron --}}
     <div class="jumbotron jumbotron-fluid"
-        style="background-image: url('{{ asset('img/bromo.jpg') }}'); background-size: cover; background-position: center;">
+        style="background-image: url('{{ asset('img/bromo.jpg') }}'); background-size: cover; background-position: center; height: auto;">
         <div class="container">
             <h1 class="display-3" style="color: white">Kami Ada Untuk Melayani Yang Terbaik Untuk Masyarakat</h1>
             <p class="lead" style="color: white">RW O2 Desa Bunder</p>
@@ -142,14 +153,14 @@
     {{-- informasi --}}
     <h1 style="text-align: center; font-family: Arial, sans-serif; font-size: 36px; color: #333; text-shadow: 2px 2px 2px #ccc; margin-top: 50px;"
         id="informasi">INFORMASI</h1>
-    <br><br>
+    <br>
     <div class="container-fluid" style="padding: 5S0px;">
         <div class="row" style="display: flex; flex-wrap: wrap; justify-content: flex-start; border: 1px">
             @foreach ($informations as $information)
                 <div class="col-md-3">
-                    <div class="card mb-4">
+                    <div class="card mb-4 rounded-card shadow-card" >
                         <img src="{{ asset('storage/' . $information->thumbnail) }}" class="card-img-top"
-                            alt="{{ $information->title }}" style="width:90%; height:350px;">
+                            alt="{{ $information->title }}" style="width:auto; " >
                         <div class="card-body">
                             <h5 class="card-title">{{ $information->title }}</h5>
                             <div class="card-text collapse multi-collapse"
@@ -157,7 +168,7 @@
                                 {!! $information->content !!}
                             </div>
 
-                            <button type="button" class="btn btn-primary" data-toggle="collapse"
+                            <button type="button" class="btn btn-primary" data-toggle="collapse" 
                                 data-target="#multiCollapseExample{{ $information->id }}" aria-expanded="false"
                                 aria-controls="multiCollapseExample{{ $information->id }}">
                                 Selengkapnya
@@ -225,7 +236,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-auto">
-                                <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
                                     <div class="card-header">RW</div>
                                     <div class="card-body">
                                         <h5 class="card-title"> RW 02</h5>
@@ -235,7 +246,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-auto">
-                                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
                                     <div class="card-header">Sekretaris</div>
                                     <div class="card-body">
                                         <h5 class="card-title"> Sekretaris RW</h5>
@@ -243,7 +254,7 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
                                     <div class="card-header">Bendahara</div>
                                     <div class="card-body">
                                         <h5 class="card-title"> Bendahara RW</h5>
@@ -253,7 +264,25 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-auto">
-                                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                    <div class="card-header">RT</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"> RT 10</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                    <div class="card-header">RT</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"> RT 11</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                                     <div class="card-header">RT</div>
                                     <div class="card-body">
                                         <h5 class="card-title"> RT 10</h5>
@@ -261,7 +290,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -335,6 +364,9 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="table-responsive">
+                            <a href="/file/FormatSuratPengantar.pdf" download="FormatSuratPengantar.pdf" class="btn btn-success">
+                                Download Format Surat
+                            </a>
                             <div class="container mt-5">
                                 <h2>Form Pengajuan Surat</h2>
                                 <form id="suratForm" enctype="multipart/form-data" class="needs-validation"

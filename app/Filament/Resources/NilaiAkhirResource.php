@@ -19,7 +19,7 @@ class NilaiAkhirResource extends Resource
 {
     protected static ?string $model = NilaiAkhir::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-puzzle';
+    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-bar';
 
     protected static ?string $navigationGroup = 'Bantuan Sosial';
     

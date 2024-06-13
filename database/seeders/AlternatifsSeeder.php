@@ -39,7 +39,7 @@ class AlternatifsSeeder extends Seeder
                 'sumberair' => 50,
                 'bahan_bakar_memasak' => 100,
                 'umur' => 100,
-                'tanggungan' => 75,
+                'tanggungan' => 50,
             ],
             [
                 'alternatif' => 'samino',
@@ -90,7 +90,7 @@ class AlternatifsSeeder extends Seeder
                 'pekerjaan' => 60,
                 'sumber_air' => 100,
                 'bahan_bakar_memasak' => 50,
-                'umur' => 75,
+                'umur' => 50,
                 'tanggungan' => 75,
             ],
             [
@@ -102,7 +102,7 @@ class AlternatifsSeeder extends Seeder
                 'pendidikan' => 75,
                 'pekerjaan' => 100,
                 'sumber_air' => 50,
-                'bahan_bakar_memasak' => 100,
+                'bahan_bakar_memasak' => 50,
                 'umur' => 50,
                 'tanggungan' => 100,
             ],

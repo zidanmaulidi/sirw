@@ -30,7 +30,7 @@ class ListNilaiAkhirs extends ListRecords
         $service = new UtilityService();
         $service->calculateFinalScores();
 
-        $this->notify('success', 'Final scores calculated and table filled successfully.');
+        $this->notify('success', 'Nilai akhir berhasil dihitung');
     }
 
     public function truncateNilaiAkhirsTable()
@@ -38,6 +38,6 @@ class ListNilaiAkhirs extends ListRecords
         $service = new UtilityService();
         $service->truncateNilaiAkhirsTable();
 
-        $this->notify('success', 'Nilai Akhir table truncated successfully.');
+        $this->notify('success', 'Nilai Akhir berhasil dihapus');
     }
 }

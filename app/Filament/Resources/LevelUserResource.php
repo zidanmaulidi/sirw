@@ -26,35 +26,9 @@ class LevelUserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $recordTitleAttribute = 'Level_Nama';
+    // protected static ?string $recordTitleAttribute = 'Level_Nama'; // untuk global search
 
     protected static ?string $navigationGroup = 'Setting';
-
-    // public static function canViewAny(): bool
-    // {
-    //     return Auth::user()->hasRole('admin');
-    // }
-
-    // public static function canView(): bool
-    // {
-    //     return Auth::user()->hasRole('admin');
-    // }
-
-    // public static function canCreate(): bool
-    // {
-    //     return Auth::user()->hasRole('admin');
-    // }
-
-    // public static function canEdit($record): bool
-    // {
-    //     return Auth::user()->hasRole('admin');
-    // }
-
-    // public static function canDelete($record): bool
-    // {
-    //     return Auth::user()->hasRole('admin');
-    // }
-
 
     public static function form(Form $form): Form
     {
@@ -83,12 +57,12 @@ class LevelUserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
-                Tables\Actions\EditAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
-                Tables\Actions\DeleteAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
+                Tables\Actions\ViewAction::make()->visible(fn () => auth::user()->hasRole('admin')),
+                Tables\Actions\EditAction::make()->visible(fn () => auth::user()->hasRole('admin')),
+                Tables\Actions\DeleteAction::make()->visible(fn () => auth::user()->hasRole('admin')),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make()->visible(fn () => Auth::user()->hasRole('admin')),
+                Tables\Actions\DeleteBulkAction::make()->visible(fn () => auth::user()->hasRole('admin')),
             ]);
     }
     
@@ -104,7 +78,7 @@ class LevelUserResource extends Resource
         return [
             'index' => Pages\ListLevelUsers::route('/'),
             'create' => Pages\CreateLevelUser::route('/create'),
-            'edit' => Pages\EditLevelUser::route('/{record}/edit'),
+            // 'edit' => Pages\EditLevelUser::route('/{record}/edit'),
         ];
     }
     
