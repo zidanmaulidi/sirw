@@ -1,0 +1,23 @@
+name: Deployment to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Running SSH actions
+        uses: appleboy/ssh-action@master
+        env:
+          DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: DOCROOT,REPO_URL,DOT_ENV_PRODUCTION
+          script: "cd /www/wwwroot/www.sirw6.my.id/SIRW_filament && ./.scripts/deploy.sh"
