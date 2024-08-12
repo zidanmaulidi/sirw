@@ -25,7 +25,7 @@
         }
 
         .navbar {
-            background-color: #ffffff;
+            background-color: rgb(248, 237, 237);
             /* White */
         }
 
@@ -41,11 +41,13 @@
         }
 
         .rounded-card {
-        border-radius: 5px; /* Sudut melengkung */
-        overflow: hidden; /* Agar konten di dalam tidak keluar dari batas kartu */
+            border-radius: 5px;
+            /* Sudut melengkung */
+            overflow: hidden;
+            /* Agar konten di dalam tidak keluar dari batas kartu */
         }
 
-        .shadow-card{
+        .shadow-card {
             box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.3s ease;
         }
@@ -53,8 +55,9 @@
 </head>
 
 <body style="background-color: white">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <a class="navbar-brand" href="#"><img src="{{ asset('LOGO/logo.png')}}" alt="logo" width="180px"></a>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(248, 237, 237)">
+        <a class="navbar-brand" href="#"><img src="{{ asset('LOGO/logo.png') }}" alt="logo"
+                width="180px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -62,23 +65,27 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarText">
             <ul class="navbar-nav ">
                 <li class="nav-item">
-                    <a class="nav-link" href="#informasi">Informasi</a>
+                    <a class="nav-link" href="#informasi" style="color: rgba(245,158,11,255)">Informasi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#kegiatan"> Kegiatan</a>
+                    <a class="nav-link" href="#kegiatan" style="color: rgba(245,158,11,255)"> Kegiatan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#StrukturModal">Struktur
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#StrukturModal"
+                        style="color: rgba(245,158,11,255)">Struktur
                         Organisasi </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#keuanganModal">Keuangan</a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#keuanganModal"
+                        style="color: rgba(245,158,11,255)">Keuangan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#AduanModal">Pengaduan</a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#AduanModal"
+                        style="color: rgba(245,158,11,255)">Pengaduan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#SuratModal">Pengajuan
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#SuratModal"
+                        style="color: rgba(245,158,11,255)">Pengajuan
                         Surat</a>
                 </li>
             </ul>
@@ -158,9 +165,9 @@
         <div class="row" style="display: flex; flex-wrap: wrap; justify-content: flex-start; border: 1px">
             @foreach ($informations as $information)
                 <div class="col-md-3">
-                    <div class="card mb-4 rounded-card shadow-card" >
+                    <div class="card mb-4 rounded-card shadow-card">
                         <img src="{{ asset('storage/' . $information->thumbnail) }}" class="card-img-top"
-                            alt="{{ $information->title }}" style="width:auto; " >
+                            alt="{{ $information->title }}" style="width:auto; ">
                         <div class="card-body">
                             <h5 class="card-title">{{ $information->title }}</h5>
                             <div class="card-text collapse multi-collapse"
@@ -168,7 +175,7 @@
                                 {!! $information->content !!}
                             </div>
 
-                            <button type="button" class="btn btn-primary" data-toggle="collapse" 
+                            <button type="button" class="btn btn-primary" data-toggle="collapse"
                                 data-target="#multiCollapseExample{{ $information->id }}" aria-expanded="false"
                                 aria-controls="multiCollapseExample{{ $information->id }}">
                                 Selengkapnya
@@ -364,7 +371,8 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="table-responsive">
-                            <a href="/file/FormatSuratPengantar.pdf" download="FormatSuratPengantar.pdf" class="btn btn-success">
+                            <a href="/file/FormatSuratPengantar.pdf" download="FormatSuratPengantar.pdf"
+                                class="btn btn-success">
                                 Download Format Surat
                             </a>
                             <div class="container mt-5">
@@ -430,7 +438,7 @@
     <BR></BR>
 
     {{-- footer --}}
-    <footer class="footer bg-light mt-auto py-3">
+    <footer class="footer  mt-auto py-3" style="background-color:  rgb(255,179,71)">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -461,16 +469,17 @@
                         <li><a href="#">Facebook</a></li>
                         <li><a href="#">Twitter</a></li>
                         <li><a href="#">Instagram</a></li>
-                        <li>telepon: <a href="#">089567482429</a></li>
-                        <li>email: <a href="#">rw02bunder@gmail.com</a></li>
-                        <li>maps: <a href=""></a></li>
+                        <li>Telepon: <a href="#">089567482429</a></li>
+                        <li>Email: <a href="#">rw02bunder@gmail.com</a></li>
+                        <li>Maps: <a href="https://maps.app.goo.gl/Y5RdJcrzNukDbtAo7">Desa Bunder</a>
+                        </li>
                     </ul>
                 </div>
 
             </div>
         </div>
     </footer>
-    <footer class="footer bg-light mt-auto py-3">
+    <footer class="footer mt-auto py-3" style="background-color: rgb(248, 237, 237)">
         <div class="container text-center">
             <span class="text-muted">Sistem Informasi Rukun Warga Dusun Bunder &copy; kelompok 6</span>
             <br>
